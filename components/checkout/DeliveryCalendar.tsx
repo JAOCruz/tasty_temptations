@@ -1,0 +1,75 @@
+"use client"
+
+import { addDays, isSunday, startOfTomorrow } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+import { Calendar } from "@/components/ui/calendar"
+
+const timeSlots = [
+  { id: "morning", label: "Morning", range: "9am - 12pm" },
+  { id: "afternoon", label: "Afternoon", range: "12pm - 4pm" },
+  { id: "evening", label: "Evening", range: "4pm - 8pm" },
+]
+
+export type TimeSlot = (typeof timeSlots)[number]
+
+export { timeSlots }
+
+export function DeliveryCalendar({
+  date,
+  onSelect,
+  timeSlot,
+  onTimeSlotChange,
+}: {
+  date: Date | undefined
+  onSelect: (date: Date | undefined) => void
+  timeSlot: string
+  onTimeSlotChange: (slot: string) => void
+}) {
+  const tomorrow = startOfTomorrow()
+  const maxDate = addDays(new Date(), 7)
+
+  const isDateDisabled = (day: Date) => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    return day < today || day > maxDate || isSunday(day)
+  }
+
+  return (
+    <div className="flex flex-col gap-6 animate-fade-in-up">
+      <div>
+        <h3 className="mb-3 flex items-center gap-2 font-heading text-lg">
+          When do you want it?
+          <CalendarIcon className="size-5" />
+        </h3>
+        <div className="flex justify-center rounded-base border-2 border-border bg-white p-4 shadow-shadow">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={onSelect}
+            disabled={isDateDisabled}
+            defaultMonth={tomorrow}
+          />
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-3 font-heading text-lg">Select time slot</h3>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {timeSlots.map((slot) => (
+            <button
+              key={slot.id}
+              onClick={() => onTimeSlotChange(slot.id)}
+              className={`rounded-base border-2 border-border p-4 text-center shadow-shadow transition-all ${
+                timeSlot === slot.id
+                  ? "bg-brand-pink text-brand-black"
+                  : "bg-white hover:-translate-x-0.5 hover:-translate-y-0.5"
+              }`}
+            >
+              <div className="font-heading">{slot.label}</div>
+              <div className="text-xs">{slot.range}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}

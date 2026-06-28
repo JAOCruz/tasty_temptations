@@ -1,0 +1,277 @@
+"use client"
+
+import { useState } from "react"
+import confetti from "canvas-confetti"
+import { Check, ChevronLeft, ChevronRight, PartyPopper } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
+import { useCartStore } from "@/lib/store/cart-store"
+import { neighborhoods } from "@/lib/data"
+import { startOfTomorrow, format } from "date-fns"
+import { DeliveryCalendar, timeSlots } from "./DeliveryCalendar"
+import { OrderSummary } from "./OrderSummary"
+import { PaymentForm } from "./PaymentForm"
+
+type Step = "details" | "date" | "summary" | "payment" | "success"
+
+const stepLabels: Record<Step, string> = {
+  details: "Delivery Details",
+  date: "Delivery Date",
+  summary: "Order Summary",
+  payment: "Payment",
+  success: "Success",
+}
+
+export function CheckoutDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}) {
+  const { items, total, clearCart } = useCartStore()
+  const [step, setStep] = useState<Step>("details")
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    neighborhood: "",
+    notes: "",
+  })
+  const [date, setDate] = useState<Date | undefined>(startOfTomorrow())
+  const [timeSlot, setTimeSlot] = useState("morning")
+  const [paymentMethod, setPaymentMethod] = useState("card")
+  const [card, setCard] = useState({ number: "", expiry: "", cvc: "" })
+  const [orderNumber, setOrderNumber] = useState<string | null>(null)
+
+  const subtotal = total()
+  const deliveryFee = subtotal >= 25 ? 0 : 3.99
+  const orderTotal = subtotal + deliveryFee
+
+  const canProceed = () => {
+    switch (step) {
+      case "details":
+        return (
+          form.name.trim() &&
+          form.phone.trim() &&
+          form.address.trim() &&
+          form.neighborhood
+        )
+      case "date":
+        return date && timeSlot
+      case "summary":
+      case "payment":
+        return true
+      default:
+        return false
+    }
+  }
+
+  const handlePlaceOrder = () => {
+    const number = Math.floor(1000 + Math.random() * 9000).toString()
+    setOrderNumber(number)
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ["#F472B6", "#A3E635", "#F5C842", "#ffffff", "#0a0a0a"],
+    })
+    setStep("success")
+    clearCart()
+  }
+
+  const reset = () => {
+    setStep("details")
+    setForm({ name: "", phone: "", address: "", neighborhood: "", notes: "" })
+    setDate(startOfTomorrow())
+    setTimeSlot("morning")
+    setPaymentMethod("card")
+    setCard({ number: "", expiry: "", cvc: "" })
+    setOrderNumber(null)
+    onOpenChange(false)
+  }
+
+  const steps: Step[] = ["details", "date", "summary", "payment"]
+  const currentStepIndex = steps.indexOf(step)
+
+  return (
+    <Dialog open={open} onOpenChange={reset}>
+      <DialogContent className="flex h-[95vh] max-h-[900px] w-[95vw] max-w-2xl flex-col overflow-hidden border-2 border-border bg-background p-0 shadow-shadow sm:h-auto">
+        <DialogHeader className="border-b-2 border-border p-4 sm:p-6">
+          <DialogTitle className="font-heading text-xl sm:text-2xl">
+            {step === "success" ? "Order Confirmed" : stepLabels[step]}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+          {step === "details" && (
+            <div className="flex flex-col gap-4 animate-fade-in-up">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="María García"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input
+                  id="phone"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  placeholder="809-555-1234"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="address">Address</Label>
+                <Input
+                  id="address"
+                  value={form.address}
+                  onChange={(e) => setForm({ ...form, address: e.target.value })}
+                  placeholder="Calle Principal #123"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="neighborhood">Neighborhood</Label>
+                <Select
+                  value={form.neighborhood}
+                  onValueChange={(value) =>
+                    setForm({ ...form, neighborhood: value })
+                  }
+                >
+                  <SelectTrigger id="neighborhood">
+                    <SelectValue placeholder="Select your neighborhood" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {neighborhoods.map((n) => (
+                      <SelectItem key={n} value={n}>
+                        {n}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="notes">Delivery Notes</Label>
+                <Textarea
+                  id="notes"
+                  value={form.notes}
+                  onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                  placeholder="Ring the bell, leave at reception..."
+                />
+              </div>
+            </div>
+          )}
+
+          {step === "date" && (
+            <DeliveryCalendar
+              date={date}
+              onSelect={setDate}
+              timeSlot={timeSlot}
+              onTimeSlotChange={setTimeSlot}
+            />
+          )}
+
+          {step === "summary" && (
+            <OrderSummary form={form} date={date} timeSlot={timeSlot} />
+          )}
+
+          {step === "payment" && (
+            <PaymentForm
+              method={paymentMethod}
+              onMethodChange={setPaymentMethod}
+              card={card}
+              onCardChange={setCard}
+            />
+          )}
+
+          {step === "success" && (
+            <div className="flex flex-col items-center gap-6 py-8 text-center animate-fade-in-up">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-border bg-brand-lime shadow-shadow">
+                <Check className="size-10 text-brand-black" />
+              </div>
+              <div>
+                <h3 className="flex items-center justify-center gap-2 font-heading text-2xl">
+                  <PartyPopper className="size-7 text-brand-gold" />
+                  ORDER PLACED!
+                </h3>
+                <p className="text-muted-foreground">
+                  Your treats are being prepared!
+                </p>
+              </div>
+              <div className="w-full rounded-base border-2 border-border bg-white p-6 shadow-shadow">
+                <p className="font-heading text-lg">Order #{orderNumber}</p>
+                <Separator className="my-3" />
+                <p className="text-sm">
+                  Estimated delivery:
+                  <br />
+                  <strong>
+                    {date ? format(date, "EEEE, MMMM do") : ""} —{" "}
+                    {timeSlots.find((s) => s.id === timeSlot)?.range}
+                  </strong>
+                </p>
+              </div>
+              <a
+                href="https://wa.me/18094567890"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                <Button className="w-full bg-brand-lime text-brand-black hover:bg-brand-lime/90">
+                  Track on WhatsApp
+                </Button>
+              </a>
+            </div>
+          )}
+        </div>
+
+        {step !== "success" && (
+          <div className="flex items-center justify-between border-t-2 border-border p-4 sm:p-6">
+            <Button
+              variant="neutral"
+              onClick={() => {
+                if (currentStepIndex > 0) setStep(steps[currentStepIndex - 1])
+                else onOpenChange(false)
+              }}
+            >
+              <ChevronLeft className="mr-1 size-4" />
+              {step === "details" ? "Cancel" : "Back"}
+            </Button>
+            <Button
+              className="bg-brand-lime text-brand-black hover:bg-brand-lime/90"
+              disabled={!canProceed()}
+              onClick={() => {
+                if (step === "payment") {
+                  handlePlaceOrder()
+                } else {
+                  setStep(steps[currentStepIndex + 1])
+                }
+              }}
+            >
+              {step === "payment" ? "PLACE ORDER" : "Next"}
+              {step !== "payment" && <ChevronRight className="ml-1 size-4" />}
+            </Button>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+  )
+}

@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
+  --color-main: var(--main);
+  --color-main-foreground: var(--main-foreground);
   --color-background: var(--background);
+  --color-secondary-background: var(--secondary-background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Brand colors */
+  --color-brand-pink: #F472B6;
+  --color-brand-lime: #A3E635;
+  --color-brand-cream: #F5F0E8;
+  --color-brand-gold: #F5C842;
+  --color-brand-black: #0a0a0a;
+  --color-brand-white: #ffffff;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fredoka), ui-sans-serif, system-ui, sans-serif;
+
+  --spacing-boxShadowX: 4px;
+  --spacing-boxShadowY: 4px;
+  --spacing-reverseBoxShadowX: -4px;
+  --spacing-reverseBoxShadowY: -4px;
+
+  --radius-base: 0.5rem;
+  --radius-sm: calc(var(--radius-base) - 4px);
+  --radius-md: var(--radius-base);
+  --radius-lg: calc(var(--radius-base) + 4px);
+  --radius-xl: calc(var(--radius-base) + 8px);
+
+  --shadow-shadow: var(--shadow);
+
+  --font-weight-base: 500;
+  --font-weight-heading: 700;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #F5F0E8;
+  --secondary-background: #ffffff;
+  --foreground: #0a0a0a;
+  --main-foreground: #0a0a0a;
+  --main: #ffffff;
+  --border: #0a0a0a;
+  --ring: #0a0a0a;
+  --overlay: #0a0a0acc;
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #F472B6;
+  --chart-2: #A3E635;
+  --chart-3: #F5C842;
+  --chart-4: #3b82f6;
+  --chart-5: #a855f7;
+  --chart-active-dot: #0a0a0a;
+}
+
+.dark {
+  --background: #1a1a1a;
+  --secondary-background: #27272a;
+  --foreground: #fafafa;
+  --main-foreground: #0a0a0a;
+  --main: #F5C842;
+  --border: #ffffff;
+  --ring: #ffffff;
+  --overlay: #000000cc;
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-active-dot: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-base;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Cart button bounce */
+@keyframes bounce-in {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.3s ease-in-out;
+}
+
+/* Add-to-cart button bounce */
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.9); }
+  80% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-pop {
+  animation: pop 0.3s ease-in-out;
+}
+
+/* Fade in up on scroll */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Shimmer skeleton */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #F5F0E8 25%, #ffffff 50%, #F5F0E8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
