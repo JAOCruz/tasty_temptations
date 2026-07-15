@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Instagram Stories — Tasty Temptations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #222;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      text-align: center;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #88e884;
+      text-shadow: 3px 3px 0 #8b5dfe;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 48px;
+      font-weight: 700;
+      color: #fff8d5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      justify-items: center;
+    }
+    .story-card {
+      background: #88e884;
+      border: 4px solid #222;
+      border-radius: 24px;
+      box-shadow: 8px 8px 0 #fff3a3;
+      width: 240px;
+      height: 426px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .story-card:hover { transform: translate(-4px, -4px); }
+    .story-card iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #8b5dfe;
+      border: 2px solid #222;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+      box-shadow: 3px 3px 0 #222;
+    }
+    .note {
+      text-align: center;
+      margin-top: 48px;
+      font-weight: 700;
+      color: #fff8d5;
+    }
+    .note a {
+      color: #88e884;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>FAQ Instagram Stories</h1>
+    <p class="subtitle">5 stories listas para historias fijadas — estilo neobrutalista</p>
+
+    <div class="grid">
+      <a href="story-1.html" class="story-card">
+        <iframe src="story-1.html" scrolling="no"></iframe>
+        <span class="label">Story 1 — Portada</span>
+      </a>
+      <a href="story-2.html" class="story-card">
+        <iframe src="story-2.html" scrolling="no"></iframe>
+        <span class="label">Story 2 — Delivery</span>
+      </a>
+      <a href="story-3.html" class="story-card">
+        <iframe src="story-3.html" scrolling="no"></iframe>
+        <span class="label">Story 3 — Pagos</span>
+      </a>
+      <a href="story-4.html" class="story-card">
+        <iframe src="story-4.html" scrolling="no"></iframe>
+        <span class="label">Story 4 — Alérgenos</span>
+      </a>
+      <a href="story-5.html" class="story-card">
+        <iframe src="story-5.html" scrolling="no"></iframe>
+        <span class="label">Story 5 — Conservación</span>
+      </a>
+    </div>
+
+    <p class="note">Abre cada story para navegar. <a href="/">Volver al sitio principal</a></p>
+  </div>
+</body>
+</html>

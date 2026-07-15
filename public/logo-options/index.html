@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasty Temptations — Logo Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #88e884;
+      font-family: 'Inter', sans-serif;
+      color: #222;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      text-align: center;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0 #fff;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 48px;
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .card {
+      background: #fff;
+      border: 4px solid #222;
+      border-radius: 18px;
+      box-shadow: 8px 8px 0 #222;
+      padding: 28px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translate(-4px, -4px); }
+    .card h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .card img {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      margin-bottom: 16px;
+      filter: drop-shadow(4px 4px 0 #222);
+    }
+    .badge {
+      display: inline-block;
+      background: #8b5dfe;
+      color: #fff;
+      border: 3px solid #222;
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-weight: 900;
+      box-shadow: 4px 4px 0 #222;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tasty Temptations</h1>
+    <p class="subtitle">Elige tu logo favorito — 3 opciones neobrutalistas</p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Opción 1 — Cupcake Chef</h2>
+        <img src="/illustrations/logos/logo-option-1.png" alt="Logo option 1 cupcake chef">
+        <span class="badge">Opción 1</span>
+      </div>
+      <div class="card">
+        <h2>Opción 2 — Croissant Star</h2>
+        <img src="/illustrations/logos/logo-option-2.png" alt="Logo option 2 croissant star">
+        <span class="badge">Opción 2</span>
+      </div>
+      <div class="card">
+        <h2>Opción 3 — Donut Sparkle</h2>
+        <img src="/illustrations/logos/logo-option-3.png" alt="Logo option 3 donut sparkle">
+        <span class="badge">Opción 3</span>
+      </div>
+    </div>
+
+    <p class="footer">Dime cuál te gusta más y lo aplico en el sitio principal.</p>
+  </div>
+</body>
+</html>

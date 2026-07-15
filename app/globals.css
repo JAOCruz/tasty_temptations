@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Roca One";
+  src: url("/fonts/RocaOne-Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --color-main: var(--main);
   --color-main-foreground: var(--main-foreground);
@@ -16,15 +24,18 @@
   --color-chart-5: var(--chart-5);
 
   /* Brand colors */
-  --color-brand-pink: #F472B6;
-  --color-brand-lime: #A3E635;
-  --color-brand-cream: #F5F0E8;
-  --color-brand-gold: #F5C842;
-  --color-brand-black: #0a0a0a;
+  --color-brand-green: #8EE36B;
+  --color-brand-purple: #8B5CF6;
+  --color-brand-cream: #FFF8E8;
+  --color-brand-yellow: #fff3a3;
+  --color-brand-orange: #ff7b54;
+  --color-brand-black: #222222;
   --color-brand-white: #ffffff;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-fredoka), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-lora), ui-serif, Georgia, serif;
+  --font-base: var(--font-lora), ui-serif, Georgia, serif;
+  --font-heading: "Roca One", var(--font-lora), ui-serif, Georgia, serif;
+  --font-button: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   --spacing-boxShadowX: 4px;
   --spacing-boxShadowY: 4px;
@@ -44,29 +55,29 @@
 }
 
 :root {
-  --background: #F5F0E8;
-  --secondary-background: #ffffff;
-  --foreground: #0a0a0a;
-  --main-foreground: #0a0a0a;
+  --background: #8EE36B;
+  --secondary-background: #FFF8E8;
+  --foreground: #222222;
+  --main-foreground: #222222;
   --main: #ffffff;
-  --border: #0a0a0a;
-  --ring: #0a0a0a;
-  --overlay: #0a0a0acc;
+  --border: #222222;
+  --ring: #222222;
+  --overlay: #222222cc;
   --shadow: 4px 4px 0px 0px var(--border);
-  --chart-1: #F472B6;
-  --chart-2: #A3E635;
-  --chart-3: #F5C842;
-  --chart-4: #3b82f6;
-  --chart-5: #a855f7;
-  --chart-active-dot: #0a0a0a;
+  --chart-1: #8B5CF6;
+  --chart-2: #8EE36B;
+  --chart-3: #fff3a3;
+  --chart-4: #ff7b54;
+  --chart-5: #222222;
+  --chart-active-dot: #222222;
 }
 
 .dark {
   --background: #1a1a1a;
   --secondary-background: #27272a;
   --foreground: #fafafa;
-  --main-foreground: #0a0a0a;
-  --main: #F5C842;
+  --main-foreground: #222222;
+  --main: #fff3a3;
   --border: #ffffff;
   --ring: #ffffff;
   --overlay: #000000cc;
@@ -84,9 +95,26 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
+  button, [data-slot="button"] {
+    font-family: var(--font-button);
+  }
 }
 
-/* Marquee animation */
+/* Pop-art image treatment */
+.pop-art-img {
+  filter: contrast(1.2) saturate(1.35);
+  border: 4px solid #222222;
+  box-shadow: 4px 4px 0px 0px #222222;
+}
+
+/* Product card image pop-art look */
+.product-pop-art img {
+  filter: contrast(1.2) saturate(1.35);
+  border: 4px solid #222222;
+  box-shadow: 4px 4px 0px 0px #222222;
+}
+
+/* Marquee animation - seamless two-copy loop */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -145,7 +173,212 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, #F5F0E8 25%, #ffffff 50%, #F5F0E8 75%);
+  background: linear-gradient(90deg, #FFF8E8 25%, #ffffff 50%, #FFF8E8 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* Floating decoration animations */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--tw-rotate, 0deg)); }
+}
+
+@keyframes float-slow-reverse {
+  0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
+  50% { transform: translateY(12px) rotate(var(--tw-rotate, 0deg)); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+  animation: float-slow-reverse 5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+/* ── Pop Art backgrounds & textures ── */
+
+/* Classic halftone dots */
+.bg-pop-dots {
+  background-image: radial-gradient(circle at center, #222222 1.5px, transparent 2px);
+  background-size: 14px 14px;
+}
+
+/* Halftone dots over brand colors */
+.bg-pop-dots-green {
+  background-color: #8EE36B;
+  background-image: radial-gradient(circle at center, rgba(34,34,34,0.18) 2px, transparent 2.5px);
+  background-size: 16px 16px;
+}
+
+.bg-pop-dots-cream {
+  background-color: #FFF8E8;
+  background-image: radial-gradient(circle at center, rgba(139,92,246,0.22) 2px, transparent 2.5px);
+  background-size: 18px 18px;
+}
+
+.bg-pop-dots-purple {
+  background-color: #8B5CF6;
+  background-image: radial-gradient(circle at center, rgba(255,255,255,0.22) 2px, transparent 2.5px);
+  background-size: 18px 18px;
+}
+
+.bg-pop-dots-white {
+  background-color: #ffffff;
+  background-image: radial-gradient(circle at center, rgba(34,34,34,0.15) 2px, transparent 2.5px);
+  background-size: 16px 16px;
+}
+
+/* Diagonal candy stripes */
+.bg-pop-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    #8EE36B,
+    #8EE36B 12px,
+    #FFF8E8 12px,
+    #FFF8E8 24px
+  );
+}
+
+.bg-pop-stripes-purple {
+  background: repeating-linear-gradient(
+    45deg,
+    #8B5CF6,
+    #8B5CF6 14px,
+    #FFF8E8 14px,
+    #FFF8E8 28px
+  );
+}
+
+/* Pop-art card with thick border + hard offset shadow */
+.pop-art-card {
+  border: 3px solid #222222;
+  box-shadow: 6px 6px 0 0 #222222;
+  background: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pop-art-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 0 #222222;
+}
+
+/* Backing shadow wrapper */
+.pop-art-backing {
+  position: relative;
+}
+
+.pop-art-backing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #222222;
+  transform: translate(6px, 6px);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+/* Angled sticker labels */
+.pop-art-sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border: 3px solid #222222;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 4px 4px 0 0 #222222;
+  transform: rotate(-3deg);
+}
+
+.pop-art-sticker-purple {
+  background: #8B5CF6;
+  color: #ffffff;
+}
+
+.pop-art-sticker-yellow {
+  background: #fff3a3;
+  color: #222222;
+}
+
+.pop-art-sticker-green {
+  background: #8EE36B;
+  color: #222222;
+}
+
+/* Pop-art inline tag with dot */
+.pop-art-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border: 2px solid #222222;
+  background: #ffffff;
+  padding: 0.25rem 0.625rem;
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 3px 3px 0 0 #222222;
+}
+
+.pop-art-tag::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #8B5CF6;
+  border: 1px solid #222222;
+}
+
+/* Stronger pop-art image treatment */
+.pop-art-img {
+  filter: contrast(1.25) saturate(1.4);
+  border: 4px solid #222222;
+  box-shadow: 5px 5px 0 0 #222222;
+}
+
+/* Comic burst / starburst shape */
+.pop-art-burst {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 7rem;
+  height: 7rem;
+  background: #fff3a3;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+    50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+  );
+  border: 3px solid #222222;
+  filter: drop-shadow(4px 4px 0 #222222);
+}
+
+/* Thick underline accent */
+.pop-art-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.pop-art-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.1em;
+  width: 100%;
+  height: 0.18em;
+  background: #fff3a3;
+  z-index: -1;
 }

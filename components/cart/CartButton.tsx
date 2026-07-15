@@ -27,7 +27,7 @@ export function CartButton() {
     >
       <ShoppingCart className="size-5" />
       {count > 0 && (
-        <Badge className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-border bg-brand-pink px-1 text-xs text-brand-black">
+        <Badge className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-border bg-brand-purple px-1 text-xs text-brand-black">
           <span className={bump ? "animate-bounce-in inline-block" : ""}>
             {count}
           </span>

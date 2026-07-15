@@ -23,7 +23,7 @@ export function FloatingCartButton() {
       variant="noShadow"
       size="icon"
       onClick={toggleCart}
-      className="fixed bottom-6 right-6 z-40 h-14 w-14 rounded-full border-2 border-border bg-brand-pink text-brand-black shadow-[4px_4px_0px_#0a0a0a] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#0a0a0a] md:hidden"
+      className="fixed bottom-6 right-6 z-40 h-14 w-14 rounded-full border-2 border-border bg-brand-purple text-brand-black shadow-[4px_4px_0px_#222222] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#222222] md:hidden"
     >
       <ShoppingCart className="size-6" />
       {count > 0 && (

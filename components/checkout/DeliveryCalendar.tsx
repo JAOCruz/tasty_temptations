@@ -5,9 +5,9 @@ import { Calendar as CalendarIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 
 const timeSlots = [
-  { id: "morning", label: "Morning", range: "9am - 12pm" },
-  { id: "afternoon", label: "Afternoon", range: "12pm - 4pm" },
-  { id: "evening", label: "Evening", range: "4pm - 8pm" },
+  { id: "morning", label: "Mañana", range: "9am - 12pm" },
+  { id: "afternoon", label: "Tarde", range: "12pm - 4pm" },
+  { id: "evening", label: "Noche", range: "4pm - 8pm" },
 ]
 
 export type TimeSlot = (typeof timeSlots)[number]
@@ -38,7 +38,7 @@ export function DeliveryCalendar({
     <div className="flex flex-col gap-6 animate-fade-in-up">
       <div>
         <h3 className="mb-3 flex items-center gap-2 font-heading text-lg">
-          When do you want it?
+          ¿Cuándo lo quieres?
           <CalendarIcon className="size-5" />
         </h3>
         <div className="flex justify-center rounded-base border-2 border-border bg-white p-4 shadow-shadow">
@@ -52,7 +52,7 @@ export function DeliveryCalendar({
         </div>
       </div>
       <div>
-        <h3 className="mb-3 font-heading text-lg">Select time slot</h3>
+        <h3 className="mb-3 font-heading text-lg">Selecciona la hora</h3>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {timeSlots.map((slot) => (
             <button
@@ -60,7 +60,7 @@ export function DeliveryCalendar({
               onClick={() => onTimeSlotChange(slot.id)}
               className={`rounded-base border-2 border-border p-4 text-center shadow-shadow transition-all ${
                 timeSlot === slot.id
-                  ? "bg-brand-pink text-brand-black"
+                  ? "bg-brand-purple text-brand-black"
                   : "bg-white hover:-translate-x-0.5 hover:-translate-y-0.5"
               }`}
             >

@@ -10,17 +10,26 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { products, categories, type Product } from "@/lib/data"
 import { useCartStore } from "@/lib/store/cart-store"
-import { Plus, Minus, ShoppingCart } from "lucide-react"
+import { formatPrice } from "@/lib/utils"
+import { Plus, Minus, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react"
+import { NeoSparkles } from "@/components/shared/NeoSparkles"
 
 function ProductCard({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1)
   const [adding, setAdding] = useState(false)
+  const [imageIndex, setImageIndex] = useState(0)
   const { addItem } = useCartStore()
+
+  const images = product.images && product.images.length > 1 ? product.images : [product.image]
+  const currentImage = images[imageIndex]
+
+  const nextImage = () => setImageIndex((i) => (i + 1) % images.length)
+  const prevImage = () => setImageIndex((i) => (i - 1 + images.length) % images.length)
 
   const handleAdd = () => {
     setAdding(true)
     addItem(product, quantity)
-    toast("Added to cart! 🛒", {
+    toast("¡Agregado al carrito!", {
       description: `${quantity}x ${product.name}`,
     })
     setTimeout(() => setAdding(false), 300)
@@ -28,38 +37,89 @@ function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <Card className="group relative overflow-hidden border-2 border-border bg-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#0a0a0a]">
+    <Card className="group relative overflow-hidden border-[3px] border-border bg-white shadow-[5px_5px_0_#222222] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0_#222222]">
       <CardContent className="flex flex-col gap-4 p-4">
-        <div className="relative aspect-square w-full overflow-hidden rounded-base border-2 border-border bg-brand-cream">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-contain p-4 transition-transform group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-        </div>
-
-        <div className="flex items-start justify-between gap-2">
-          <div>
-            <p className="text-xs font-base uppercase text-muted-foreground">
+        {/* Image container */}
+        <div className="product-pop-art relative aspect-square w-full overflow-hidden rounded-base border-[3px] border-border bg-pop-dots-white shadow-[4px_4px_0_#222222]">
+          {product.comingSoon ? (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-white p-5 text-center">
+              <span className="text-4xl">📷</span>
+              <p className="font-heading text-sm uppercase leading-tight text-brand-black">
+                ¡Foto próximamente! pero el sabor ya está listo para conquistarte.
+              </p>
+            </div>
+          ) : (
+            <Image
+              key={currentImage}
+              src={currentImage}
+              alt={product.name}
+              fill
+              className="pop-art-img object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          )}
+          {/* Category badge */}
+          <div className="absolute left-3 top-3">
+            <Badge className="border-[3px] border-border bg-brand-yellow text-xs uppercase text-brand-black shadow-[3px_3px_0_#222222]">
               {product.category}
-            </p>
-            <h3 className="font-heading text-lg leading-tight">
-              {product.emoji} {product.name}
-            </h3>
+            </Badge>
           </div>
-          <Badge className="shrink-0 bg-brand-gold text-brand-black">
-            ${product.price.toFixed(2)}
-          </Badge>
+          {/* Carousel controls */}
+          {!product.comingSoon && images.length > 1 && (
+            <>
+              <button
+                onClick={prevImage}
+                className="absolute left-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-2 border-border bg-white text-brand-black shadow-[2px_2px_0_#222222] transition-transform hover:scale-110"
+                aria-label="Imagen anterior"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-2 border-border bg-white text-brand-black shadow-[2px_2px_0_#222222] transition-transform hover:scale-110"
+                aria-label="Siguiente imagen"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+              <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1">
+                {images.map((_, idx) => (
+                  <span
+                    key={idx}
+                    className={`block h-2 w-2 rounded-full border border-brand-black ${
+                      idx === imageIndex ? "bg-brand-purple" : "bg-white"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
+        {/* Product info */}
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="font-heading text-lg leading-tight">
+              <span className="mr-1">{product.emoji}</span>
+              {product.name}
+            </h3>
+            {product.description && (
+              <p className="mt-1 text-xs text-brand-black/70">
+                {product.description}
+              </p>
+            )}
+          </div>
+          <span className="shrink-0 rounded-base border-[3px] border-border bg-brand-purple px-2.5 py-1 font-heading text-sm text-white shadow-[3px_3px_0_#222222]">
+            {formatPrice(product.price)}
+          </span>
+        </div>
+
+        {/* Quantity + Add to cart */}
         <div className="mt-auto flex items-center gap-2">
-          <div className="flex items-center">
+          <div className="flex items-center overflow-hidden rounded-base border-[3px] border-border shadow-[4px_4px_0_#222222]">
             <Button
               variant="noShadow"
               size="icon"
-              className="h-9 w-9 rounded-r-none border-2 border-r-0 border-border bg-secondary-background"
+              className="h-9 w-9 rounded-none border-0 border-r-[3px] border-border bg-secondary-background hover:bg-brand-green/30"
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
             >
               <Minus className="size-4" />
@@ -71,25 +131,25 @@ function ProductCard({ product }: { product: Product }) {
               onChange={(e) =>
                 setQuantity(Math.max(1, parseInt(e.target.value) || 1))
               }
-              className="h-9 w-14 rounded-none border-2 border-border bg-white text-center font-heading text-sm [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              className="h-9 w-12 rounded-none border-0 bg-white text-center font-heading text-sm [appearance:textfield] focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             />
             <Button
               variant="noShadow"
               size="icon"
-              className="h-9 w-9 rounded-l-none border-2 border-l-0 border-border bg-secondary-background"
+              className="h-9 w-9 rounded-none border-0 border-l-[3px] border-border bg-secondary-background hover:bg-brand-green/30"
               onClick={() => setQuantity(quantity + 1)}
             >
               <Plus className="size-4" />
             </Button>
           </div>
           <Button
-            className={`flex-1 border-2 border-border bg-brand-pink font-heading text-brand-black shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none ${
+            className={`flex-1 border-[3px] border-border bg-brand-green font-heading text-sm uppercase text-brand-black shadow-[4px_4px_0_#222222] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-green/90 hover:shadow-[6px_6px_0_#222222] ${
               adding ? "animate-pop" : ""
             }`}
             onClick={handleAdd}
           >
             <ShoppingCart className="mr-1 size-4" />
-            ADD
+            AÑADIR
           </Button>
         </div>
       </CardContent>
@@ -98,31 +158,42 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function Menu() {
-  const [activeCategory, setActiveCategory] = useState("All")
+  const [activeCategory, setActiveCategory] = useState("Todo")
 
   const filteredProducts =
-    activeCategory === "All"
+    activeCategory === "Todo"
       ? products
       : products.filter((p) => p.category === activeCategory)
 
   return (
-    <section id="menu" className="bg-brand-black py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-8 text-center font-heading text-4xl uppercase text-white sm:text-5xl lg:text-6xl">
-          OUR MENU
-        </h2>
+    <section id="menu" className="relative overflow-hidden bg-pop-dots-cream py-20 sm:py-28">
+      <NeoSparkles variant="menu" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <div className="mx-auto inline-block rounded-base border-[3px] border-border bg-white p-6 shadow-[6px_6px_0_#222222] sm:p-8">
+            <span className="pop-art-sticker pop-art-sticker-green mb-4 inline-flex rotate-2">
+              Menú fresco
+            </span>
+            <h2 className="mb-3 font-heading text-4xl uppercase text-brand-black sm:text-5xl lg:text-6xl">
+              Nuestras Tentaciones
+            </h2>
+            <p className="mx-auto max-w-xl text-base text-brand-black/70">
+              Hecho a mano con ingredientes de calidad, para convertir cada antojo en un momento especial ✨
+            </p>
+          </div>
+        </div>
 
         <Tabs
           value={activeCategory}
           onValueChange={setActiveCategory}
-          className="mb-10 w-full"
+          className="mb-12 w-full"
         >
-          <TabsList className="flex w-full flex-wrap justify-start gap-2 rounded-base border-2 border-border bg-secondary-background p-2 sm:justify-center">
+          <TabsList className="flex h-auto min-h-[3rem] w-full flex-wrap justify-center gap-2 rounded-base border-[3px] border-border bg-white p-2 shadow-[5px_5px_0_#222222]">
             {categories.map((category) => (
               <TabsTrigger
                 key={category}
                 value={category}
-                className="rounded-base border-2 border-transparent px-4 py-2 font-heading text-sm uppercase text-foreground data-[state=active]:border-border data-[state=active]:bg-brand-pink data-[state=active]:text-brand-black data-[state=active]:shadow-shadow"
+                className="rounded-base border-[3px] border-transparent px-4 py-2 font-heading text-sm uppercase text-foreground transition-all data-[state=active]:border-border data-[state=active]:bg-brand-green data-[state=active]:text-brand-black data-[state=active]:shadow-[4px_4px_0_#222222]"
               >
                 {category}
               </TabsTrigger>

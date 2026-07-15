@@ -3,138 +3,196 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Marquee } from "@/components/shared/Marquee"
-import { Sparkles, ArrowRight } from "lucide-react"
+import { NeoSparkles } from "@/components/shared/NeoSparkles"
+import {
+  ArrowRight,
+  MapPin,
+  CakeSlice,
+} from "lucide-react"
+
+const heroDesserts = [
+  {
+    src: "/illustrations/hero-pop/rolls.png",
+    alt: "Cinnamon rolls pop-art",
+    className: "absolute -left-2 bottom-0 z-10 w-24 -rotate-12 sm:w-28 md:-left-6 md:w-36",
+  },
+  {
+    src: "/favicon.png",
+    alt: "Cheesecake pop-art",
+    className: "absolute left-1/2 top-1/2 z-20 w-48 -translate-x-1/2 -translate-y-1/2 sm:w-60 md:w-72 lg:w-80",
+  },
+  {
+    src: "/illustrations/hero-pop/brownies.png",
+    alt: "Brownies pop-art",
+    className: "absolute -right-2 bottom-2 z-10 w-24 rotate-12 sm:w-28 md:-right-6 md:w-36",
+  },
+]
+
+const floatingDesserts = [
+  {
+    src: "/illustrations/hero-pop/cake.png",
+    alt: "Cake pop-art",
+    className: "absolute right-0 top-0 z-10 hidden w-20 rotate-6 md:-right-16 md:block lg:w-24 lg:-right-20",
+  },
+  {
+    src: "/illustrations/hero-pop/carrot-cake.png",
+    alt: "Carrot cake pop-art",
+    className: "absolute bottom-16 right-0 z-10 hidden w-16 -rotate-12 md:-right-12 md:block lg:w-20 lg:-right-16",
+  },
+]
+
+const bottomTags = [
+  { label: "Cheesecakes", icon: "/favicon.png" },
+  { label: "Brownies", icon: "/illustrations/hero-pop/brownies.png" },
+  { label: "Cinnamon Rolls", icon: "/illustrations/hero-pop/rolls.png" },
+  { label: "Carrot Cake", icon: "/illustrations/hero-pop/carrot-cake.png" },
+]
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] w-full flex-col overflow-hidden bg-brand-cream pt-16">
-      {/* Background split with grid lines */}
-      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
-        <div className="bg-brand-pink" />
-        <div className="bg-brand-cream" />
+    <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-brand-cream pt-16 md:min-h-[92vh]">
+      {/* Background split with halftone dots */}
+      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-[55%_45%]">
+        <div className="bg-pop-dots-green" />
+        <div className="bg-pop-dots-cream" />
       </div>
 
-      {/* Grid lines */}
+      {/* Decorative grid lines */}
       <div className="pointer-events-none absolute inset-0 hidden md:block">
-        <div className="absolute left-1/2 top-0 h-full w-[3px] bg-brand-black" />
-        <div className="absolute left-0 top-[50%] h-[3px] w-full bg-brand-black" />
+        <div className="absolute left-0 top-[42%] h-[3px] w-full bg-brand-black" />
+        <div className="absolute left-[55%] top-0 h-full w-[3px] bg-brand-black" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-8 sm:px-6 lg:px-8">
-        {/* Top half */}
-        <div className="grid flex-1 grid-cols-1 items-end gap-6 pb-6 md:grid-cols-2 md:gap-8">
-          {/* Top left */}
-          <div className="flex flex-col items-center gap-4 text-center md:items-start md:pb-8 md:text-left">
-            <h1 className="font-heading text-6xl font-bold uppercase leading-[0.85] tracking-tight text-brand-black sm:text-7xl lg:text-8xl">
+      {/* Neo-brutalist sparkles & talk boxes */}
+      <NeoSparkles variant="hero" className="z-0" />
+
+      {/* Main content */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6 lg:px-8">
+        {/* Top row */}
+        <div className="grid flex-1 grid-cols-1 items-end gap-6 md:grid-cols-[55%_45%] md:gap-8">
+          {/* Top left - Title & badge */}
+          <div className="flex flex-col items-center gap-4 pb-4 text-center md:items-start md:pb-8 md:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border-[3px] border-border bg-white px-4 py-1.5 shadow-[4px_4px_0_#222222]">
+              <CakeSlice className="size-4 text-brand-purple" />
+              <span className="font-heading text-xs uppercase tracking-wider">
+                Santo Domingo, DR
+              </span>
+            </div>
+            <h1 className="w-full px-2 text-center font-heading text-[11vw] font-bold uppercase leading-[0.85] tracking-tight text-brand-black break-words sm:px-0 sm:text-5xl md:text-left md:text-6xl lg:text-7xl xl:text-8xl">
               TASTY
               <br />
               TEMPTATIONS
             </h1>
-            <div className="rounded-full border-2 border-border bg-brand-gold px-6 py-2 shadow-shadow">
+            <div className="rounded-full border-[3px] border-border bg-brand-yellow px-6 py-2 shadow-[5px_5px_0_#222222]">
               <span className="font-heading text-xs uppercase tracking-wider text-brand-black sm:text-sm">
-                FRESH BAKED. DELIVERED DAILY.
+                Tentación horneada fresca. Nada de stock, todo hecho para ti.
               </span>
             </div>
+            <span className="pop-art-sticker pop-art-sticker-purple -rotate-6">
+              ¡Hecho en SDQ!
+            </span>
           </div>
 
-          {/* Top right */}
-          <div className="relative hidden h-full items-start justify-end md:flex md:pt-8">
-            <Sparkles className="size-12 text-brand-gold" />
-            <Sparkles className="ml-4 mt-8 size-8 text-brand-gold" />
-            <Sparkles className="ml-6 mt-16 size-10 text-brand-gold" />
+          {/* Top right - value prop */}
+          <div className="relative hidden h-full flex-col items-end justify-end pb-4 pr-4 md:flex md:pb-8">
+            <div className="max-w-[260px] rotate-2 rounded-base border-[3px] border-border bg-white p-4 shadow-[5px_5px_0_#222222]">
+              <p className="font-heading text-sm">
+                Pide con 48 horas de antelación, así todo sale fresco del horno. ¿Lo necesitas antes? Pregúntanos.
+              </p>
+              <div className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+                <MapPin className="size-3" /> Entrega en todo Santo Domingo
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom half */}
-        <div className="grid flex-1 grid-cols-1 items-start gap-6 md:grid-cols-2 md:gap-8">
+        {/* Bottom row */}
+        <div className="grid flex-1 grid-cols-1 items-start gap-6 md:grid-cols-[55%_45%] md:gap-8">
           {/* Bottom left - illustrations */}
-          <div className="relative mx-auto flex w-full max-w-md items-center justify-center md:max-w-lg">
-            {/* Donut stack left */}
-            <div className="absolute -left-2 bottom-0 z-10 w-24 -rotate-12 sm:w-28 md:-left-4 md:w-32">
-              <Image
-                src="/illustrations/glazed-donut-stack.png"
-                alt="Glazed Donut Stack"
-                width={180}
-                height={180}
-                className="drop-shadow-[4px_4px_0px_#0a0a0a]"
-              />
-            </div>
-
-            {/* Main croissant center */}
-            <div className="relative z-20 w-44 -rotate-6 sm:w-52 md:w-60 lg:w-64">
-              <Image
-                src="/illustrations/croissant.png"
-                alt="Fresh Croissant"
-                width={320}
-                height={320}
-                priority
-                className="drop-shadow-[6px_6px_0px_#0a0a0a]"
-              />
-            </div>
-
-            {/* Cake slice right */}
-            <div className="absolute -right-2 bottom-2 z-10 w-24 rotate-12 sm:w-28 md:-right-4 md:w-32">
-              <Image
-                src="/illustrations/pink-cake-slice.png"
-                alt="Pink Cake Slice"
-                width={180}
-                height={180}
-                className="drop-shadow-[4px_4px_0px_#0a0a0a]"
-              />
-            </div>
-
-            {/* Curved arrow */}
-            <svg
-              className="absolute -right-8 top-0 w-20 rotate-12 text-white md:-right-12 md:w-24"
-              viewBox="0 0 100 100"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="4"
-            >
-              <path d="M10 90 Q 60 80 80 30" strokeLinecap="round" />
-              <path
-                d="M70 40 L 80 30 L 85 45"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          <div className="relative mx-auto flex h-[280px] w-full max-w-lg items-center justify-center sm:h-[320px] md:h-[380px] md:max-w-xl lg:h-[420px]">
+            {heroDesserts.map((dessert, idx) => (
+              <div key={dessert.alt} className={dessert.className}>
+                {idx === 1 ? (
+                  <div className="relative aspect-square h-full">
+                    <Image
+                      src={dessert.src}
+                      alt={dessert.alt}
+                      fill
+                      priority
+                      className="pop-art-img rounded-full bg-white object-cover"
+                    />
+                  </div>
+                ) : (
+                  <Image
+                    src={dessert.src}
+                    alt={dessert.alt}
+                    width={200}
+                    height={200}
+                    className="pop-art-img rounded-full bg-white"
+                  />
+                )}
+              </div>
+            ))}
           </div>
 
           {/* Bottom right - CTA */}
-          <div className="flex flex-col items-center justify-center gap-5 text-center md:items-start md:pt-8 md:text-left">
+          <div className="relative flex flex-col items-center justify-center gap-5 px-4 text-center md:items-start md:justify-start md:pl-10 md:pt-8 md:text-left lg:pl-14">
+            {floatingDesserts.map((dessert) => (
+              <div key={dessert.alt} className={dessert.className}>
+                <Image
+                  src={dessert.src}
+                  alt={dessert.alt}
+                  width={120}
+                  height={120}
+                  className="pop-art-img rounded-full bg-white"
+                />
+              </div>
+            ))}
             <p className="max-w-sm font-base text-base text-brand-black sm:text-lg">
-              Freshly baked desserts delivered to your door in Santo Domingo.
-              Order by 8pm for next-day delivery.
+              Tentaciones recién horneadas, con delivery o pickup en Santo Domingo.
+              Cheesecakes, brownies, cinnamon rolls y más pecados deliciosos.
             </p>
             <a href="#menu">
-              <Button className="border-2 border-border bg-brand-black px-8 py-6 font-heading text-lg uppercase text-white shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:bg-brand-black hover:shadow-none">
-                ORDER NOW
+              <Button className="border-[3px] border-border bg-brand-black px-8 py-6 font-heading text-lg uppercase text-white shadow-[5px_5px_0_#222222] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-black hover:shadow-[8px_8px_0_#222222]">
+                PIDE AHORA
                 <ArrowRight className="ml-2 size-5" />
               </Button>
             </a>
+            <div className="mt-2 flex flex-wrap justify-center gap-2 md:justify-start">
+              {bottomTags.map((tag) => (
+                <span
+                  key={tag.label}
+                  className="pop-art-tag"
+                >
+                  <Image
+                    src={tag.icon}
+                    alt={tag.label}
+                    width={18}
+                    height={18}
+                    className="rounded-full border border-brand-black"
+                  />
+                  {tag.label}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom lime bar */}
-      <div className="relative z-20 h-2 bg-brand-lime" />
+      <div className="relative z-20 h-2 bg-brand-green" />
 
       {/* Marquee ticker */}
-      <div className="relative z-30 bg-brand-black py-2">
-        <Marquee className="border-none" speed={20}>
+      <div className="relative z-30 bg-brand-black py-2.5">
+        <Marquee className="border-none" speed={25}>
           <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
-            FREE SHIPPING ON ORDERS $25+
+            Tentaciones horneadas desde cero.
           </span>
-          <span className="text-brand-gold">★</span>
+          <span className="text-brand-yellow">★</span>
           <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
-            FRESH BAKED DAILY
+            Delivery gratis en pedidos desde RD$1,800 en zona metropolitana.
           </span>
-          <span className="text-brand-gold">★</span>
-          <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
-            DELIVERED TO YOUR DOOR
-          </span>
-          <span className="text-brand-gold">★</span>
+          <span className="text-brand-yellow">★</span>
         </Marquee>
       </div>
     </section>

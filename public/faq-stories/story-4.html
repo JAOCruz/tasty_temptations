@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Alérgenos & Personalizados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+    .story {
+      width: 100%;
+      max-width: 430px;
+      aspect-ratio: 9/16;
+      background: #88e884;
+      border: 4px solid #222;
+      border-radius: 24px;
+      box-shadow: 12px 12px 0 #000;
+      position: relative;
+      overflow: hidden;
+      padding: 44px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .header img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      filter: drop-shadow(3px 3px 0 #222);
+    }
+    .header h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #222;
+      text-shadow: 2px 2px 0 #fff;
+      line-height: 1;
+    }
+    .qa {
+      background: #fff;
+      border: 3px solid #222;
+      border-radius: 14px;
+      box-shadow: 6px 6px 0 #222;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    .qa:last-of-type { margin-bottom: 0; }
+    .qa h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qa p, .qa li {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #222;
+      font-weight: 500;
+    }
+    .qa ul { list-style: none; padding-left: 0; }
+    .qa li { margin: 6px 0; padding-left: 24px; position: relative; }
+    .qa li:before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      color: #ff7b54;
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+    .alert {
+      display: inline-block;
+      background: #ff7b54;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+    .flower, .star {
+      position: absolute;
+      border: 3px solid #222;
+      box-shadow: 5px 5px 0 #222;
+    }
+    .flower {
+      right: 24px;
+      top: 140px;
+      width: 60px;
+      height: 60px;
+      background: #ff7b54;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .star {
+      left: 24px;
+      bottom: 120px;
+      width: 55px;
+      height: 55px;
+      background: #fff3a3;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .badge {
+      position: absolute;
+      right: 24px;
+      bottom: 40px;
+      background: #fff3a3;
+      border: 3px solid #222;
+      border-radius: 10px;
+      padding: 10px 18px;
+      box-shadow: 5px 5px 0 #222;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      color: #222;
+      font-size: 0.9rem;
+    }
+    .page {
+      position: absolute;
+      left: 24px;
+      bottom: 40px;
+      background: #fff;
+      border: 3px solid #222;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 4px 0 #222;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+    .nav {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 10;
+    }
+    .nav.prev { left: 0; }
+    .nav.next { right: 0; }
+  </style>
+</head>
+<body>
+  <div class="story">
+    <a class="nav prev" href="story-3.html"></a>
+    <a class="nav next" href="story-5.html"></a>
+    <div class="star">★</div>
+    <div class="flower">✿</div>
+
+    <div class="header">
+      <img src="/illustrations/logos/logo-option-1.png" alt="Tasty Temptations logo">
+      <h1>FAQ</h1>
+    </div>
+
+    <div class="qa">
+      <h2>🥜 ¿Contienen alérgenos?</h2>
+      <p>Sí. Nuestros productos pueden contener:</p>
+      <ul>
+        <li>leche</li>
+        <li>huevos</li>
+        <li>trigo</li>
+        <li>nueces</li>
+      </ul>
+      <p style="margin-top:10px;"><span class="alert">Importante:</span> Si tienes alguna alergia, contáctanos antes de ordenar.</p>
+    </div>
+
+    <div class="qa">
+      <h2>🎂 ¿Hacen pedidos personalizados?</h2>
+      <p>¡Sí! Depende del producto y la disponibilidad. Escríbenos y vemos cómo ayudarte.</p>
+    </div>
+
+    <div class="badge">Yum!</div>
+    <div class="page">4/5</div>
+  </div>
+</body>
+</html>

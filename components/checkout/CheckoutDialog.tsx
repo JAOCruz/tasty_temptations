@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import confetti from "canvas-confetti"
-import { Check, ChevronLeft, ChevronRight, PartyPopper } from "lucide-react"
+import { Check, ChevronLeft, ChevronRight, PartyPopper, Truck } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -23,7 +23,9 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { useCartStore } from "@/lib/store/cart-store"
 import { neighborhoods } from "@/lib/data"
+import { formatPrice } from "@/lib/utils"
 import { startOfTomorrow, format } from "date-fns"
+import { es } from "date-fns/locale"
 import { DeliveryCalendar, timeSlots } from "./DeliveryCalendar"
 import { OrderSummary } from "./OrderSummary"
 import { PaymentForm } from "./PaymentForm"
@@ -31,12 +33,14 @@ import { PaymentForm } from "./PaymentForm"
 type Step = "details" | "date" | "summary" | "payment" | "success"
 
 const stepLabels: Record<Step, string> = {
-  details: "Delivery Details",
-  date: "Delivery Date",
-  summary: "Order Summary",
-  payment: "Payment",
-  success: "Success",
+  details: "Datos de entrega",
+  date: "Fecha de entrega",
+  summary: "Resumen del pedido",
+  payment: "Pago",
+  success: "Confirmación",
 }
+
+const FREE_DELIVERY_THRESHOLD = 1800
 
 export function CheckoutDialog({
   open,
@@ -61,8 +65,9 @@ export function CheckoutDialog({
   const [orderNumber, setOrderNumber] = useState<string | null>(null)
 
   const subtotal = total()
-  const deliveryFee = subtotal >= 25 ? 0 : 3.99
+  const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 250
   const orderTotal = subtotal + deliveryFee
+  const amountForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal)
 
   const canProceed = () => {
     switch (step) {
@@ -90,7 +95,7 @@ export function CheckoutDialog({
       particleCount: 150,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ["#F472B6", "#A3E635", "#F5C842", "#ffffff", "#0a0a0a"],
+      colors: ["#8B5CF6", "#8EE36B", "#fff3a3", "#ffffff", "#222222"],
     })
     setStep("success")
     clearCart()
@@ -115,7 +120,7 @@ export function CheckoutDialog({
       <DialogContent className="flex h-[95vh] max-h-[900px] w-[95vw] max-w-2xl flex-col overflow-hidden border-2 border-border bg-background p-0 shadow-shadow sm:h-auto">
         <DialogHeader className="border-b-2 border-border p-4 sm:p-6">
           <DialogTitle className="font-heading text-xl sm:text-2xl">
-            {step === "success" ? "Order Confirmed" : stepLabels[step]}
+            {step === "success" ? "Pedido confirmado" : stepLabels[step]}
           </DialogTitle>
         </DialogHeader>
 
@@ -123,7 +128,7 @@ export function CheckoutDialog({
           {step === "details" && (
             <div className="flex flex-col gap-4 animate-fade-in-up">
               <div className="grid gap-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">Nombre completo</Label>
                 <Input
                   id="name"
                   value={form.name}
@@ -132,7 +137,7 @@ export function CheckoutDialog({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label htmlFor="phone">Teléfono</Label>
                 <Input
                   id="phone"
                   value={form.phone}
@@ -141,7 +146,7 @@ export function CheckoutDialog({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">Address</Label>
+                <Label htmlFor="address">Dirección</Label>
                 <Input
                   id="address"
                   value={form.address}
@@ -150,7 +155,7 @@ export function CheckoutDialog({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="neighborhood">Neighborhood</Label>
+                <Label htmlFor="neighborhood">Sector</Label>
                 <Select
                   value={form.neighborhood}
                   onValueChange={(value) =>
@@ -158,7 +163,7 @@ export function CheckoutDialog({
                   }
                 >
                   <SelectTrigger id="neighborhood">
-                    <SelectValue placeholder="Select your neighborhood" />
+                    <SelectValue placeholder="Selecciona tu sector" />
                   </SelectTrigger>
                   <SelectContent>
                     {neighborhoods.map((n) => (
@@ -170,12 +175,12 @@ export function CheckoutDialog({
                 </Select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="notes">Delivery Notes</Label>
+                <Label htmlFor="notes">Notas de entrega</Label>
                 <Textarea
                   id="notes"
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                  placeholder="Ring the bell, leave at reception..."
+                  placeholder="Toca el timbre, dejar en recepción..."
                 />
               </div>
             </div>
@@ -191,7 +196,19 @@ export function CheckoutDialog({
           )}
 
           {step === "summary" && (
-            <OrderSummary form={form} date={date} timeSlot={timeSlot} />
+            <>
+              <div className={`mb-4 rounded-base border-2 border-border p-3 shadow-shadow ${subtotal >= FREE_DELIVERY_THRESHOLD ? "bg-brand-green" : "bg-brand-yellow"}`}>
+                <div className="flex items-center gap-2">
+                  <Truck className="size-5 shrink-0" />
+                  <span className="font-heading text-sm">
+                    {subtotal >= FREE_DELIVERY_THRESHOLD
+                      ? "¡Tu pedido califica para envío gratis!"
+                      : `Agrega ${formatPrice(amountForFreeDelivery)} más para envío gratis`}
+                  </span>
+                </div>
+              </div>
+              <OrderSummary form={form} date={date} timeSlot={timeSlot} />
+            </>
           )}
 
           {step === "payment" && (
@@ -205,40 +222,36 @@ export function CheckoutDialog({
 
           {step === "success" && (
             <div className="flex flex-col items-center gap-6 py-8 text-center animate-fade-in-up">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-border bg-brand-lime shadow-shadow">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-border bg-brand-green shadow-shadow">
                 <Check className="size-10 text-brand-black" />
               </div>
               <div>
                 <h3 className="flex items-center justify-center gap-2 font-heading text-2xl">
-                  <PartyPopper className="size-7 text-brand-gold" />
-                  ORDER PLACED!
+                  <PartyPopper className="size-7 text-brand-yellow" />
+                  ¡PEDIDO HECHO!
                 </h3>
                 <p className="text-muted-foreground">
-                  Your treats are being prepared!
+                  ¡Tus dulces se están preparando!
                 </p>
               </div>
               <div className="w-full rounded-base border-2 border-border bg-white p-6 shadow-shadow">
-                <p className="font-heading text-lg">Order #{orderNumber}</p>
+                <p className="font-heading text-lg">Pedido #{orderNumber}</p>
                 <Separator className="my-3" />
                 <p className="text-sm">
-                  Estimated delivery:
+                  Entrega estimada:
                   <br />
                   <strong>
-                    {date ? format(date, "EEEE, MMMM do") : ""} —{" "}
+                    {date ? format(date, "EEEE, MMMM do", { locale: es }) : ""} —{" "}
                     {timeSlots.find((s) => s.id === timeSlot)?.range}
                   </strong>
                 </p>
               </div>
-              <a
-                href="https://wa.me/18094567890"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full"
+              <Button
+                disabled
+                className="w-full bg-brand-green text-brand-black hover:bg-brand-green/90"
               >
-                <Button className="w-full bg-brand-lime text-brand-black hover:bg-brand-lime/90">
-                  Track on WhatsApp
-                </Button>
-              </a>
+                Pedido registrado
+              </Button>
             </div>
           )}
         </div>
@@ -253,10 +266,10 @@ export function CheckoutDialog({
               }}
             >
               <ChevronLeft className="mr-1 size-4" />
-              {step === "details" ? "Cancel" : "Back"}
+              {step === "details" ? "Cancelar" : "Atrás"}
             </Button>
             <Button
-              className="bg-brand-lime text-brand-black hover:bg-brand-lime/90"
+              className="bg-brand-green text-brand-black hover:bg-brand-green/90"
               disabled={!canProceed()}
               onClick={() => {
                 if (step === "payment") {
@@ -266,7 +279,7 @@ export function CheckoutDialog({
                 }
               }}
             >
-              {step === "payment" ? "PLACE ORDER" : "Next"}
+              {step === "payment" ? "CONFIRMAR PEDIDO" : "Siguiente"}
               {step !== "payment" && <ChevronRight className="ml-1 size-4" />}
             </Button>
           </div>

@@ -1,13 +1,12 @@
 "use client"
 
-import { CreditCard, DollarSign, MessageCircle } from "lucide-react"
+import { CreditCard, DollarSign } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 const paymentMethods = [
-  { id: "card", label: "Card", icon: CreditCard },
-  { id: "cash", label: "Cash on Delivery", icon: DollarSign },
-  { id: "whatsapp", label: "WhatsApp Pay", icon: MessageCircle },
+  { id: "card", label: "Tarjeta", icon: CreditCard },
+  { id: "cash", label: "Efectivo", icon: DollarSign },
 ]
 
 export { paymentMethods }
@@ -32,7 +31,7 @@ export function PaymentForm({
             onClick={() => onMethodChange(paymentMethod.id)}
             className={`flex flex-col items-center gap-2 rounded-base border-2 border-border p-4 shadow-shadow transition-all ${
               method === paymentMethod.id
-                ? "bg-brand-lime text-brand-black"
+                ? "bg-brand-green text-brand-black"
                 : "bg-white hover:-translate-x-0.5 hover:-translate-y-0.5"
             }`}
           >
@@ -47,7 +46,7 @@ export function PaymentForm({
       {method === "card" && (
         <div className="flex flex-col gap-3 rounded-base border-2 border-border bg-white p-4 shadow-shadow">
           <div className="grid gap-2">
-            <Label htmlFor="card-number">Card Number</Label>
+            <Label htmlFor="card-number">Número de tarjeta</Label>
             <Input
               id="card-number"
               value={card.number}
@@ -57,7 +56,7 @@ export function PaymentForm({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="grid gap-2">
-              <Label htmlFor="expiry">Expiry</Label>
+              <Label htmlFor="expiry">Vencimiento</Label>
               <Input
                 id="expiry"
                 value={card.expiry}
@@ -80,16 +79,7 @@ export function PaymentForm({
 
       {method === "cash" && (
         <div className="rounded-base border-2 border-border bg-white p-4 shadow-shadow text-center">
-          <p className="font-heading">Pay with cash when your treats arrive</p>
-        </div>
-      )}
-
-      {method === "whatsapp" && (
-        <div className="rounded-base border-2 border-border bg-white p-4 shadow-shadow text-center">
-          <p className="font-heading">WhatsApp Pay</p>
-          <p className="text-sm text-muted-foreground">
-            Send payment to +1 (809) 456-7890
-          </p>
+          <p className="font-heading">Paga en efectivo cuando lleguen tus dulces</p>
         </div>
       )}
     </div>

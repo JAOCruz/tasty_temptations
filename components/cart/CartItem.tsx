@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Minus, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCartStore, CartItem as CartItemType } from "@/lib/store/cart-store"
+import { formatPrice } from "@/lib/utils"
 
 export function CartItem({ item }: { item: CartItemType }) {
   const { updateQuantity, removeItem } = useCartStore()
@@ -23,8 +24,8 @@ export function CartItem({ item }: { item: CartItemType }) {
           <span className="font-heading text-sm leading-tight">
             {item.product.name}
           </span>
-          <span className="font-heading text-sm text-brand-gold">
-            ${(item.product.price * item.quantity).toFixed(2)}
+          <span className="font-heading text-sm text-brand-yellow">
+            {formatPrice(item.product.price * item.quantity)}
           </span>
         </div>
         <div className="flex items-center justify-between">
@@ -52,7 +53,7 @@ export function CartItem({ item }: { item: CartItemType }) {
           <Button
             variant="noShadow"
             size="icon"
-            className="h-7 w-7 border-2 border-border bg-brand-pink text-brand-black"
+            className="h-7 w-7 border-2 border-border bg-brand-purple text-brand-black"
             onClick={() => removeItem(item.product.id)}
           >
             <Trash2 className="size-3" />

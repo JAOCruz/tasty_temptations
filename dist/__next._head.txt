@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[37071,["/_next/static/chunks/32b9zcs69e7gp.js","/_next/static/chunks/2ar1v5wqwcf2e.js"],"ViewportBoundary"]
-3:I[37071,["/_next/static/chunks/32b9zcs69e7gp.js","/_next/static/chunks/2ar1v5wqwcf2e.js"],"MetadataBoundary"]
-4:"$Sreact.suspense"
-5:I[44893,["/_next/static/chunks/32b9zcs69e7gp.js","/_next/static/chunks/2ar1v5wqwcf2e.js"],"IconMark"]
-0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Tasty Temptations | Fresh Baked Desserts in Santo Domingo"}],["$","meta","1",{"name":"description","content":"Order fresh croissants, donuts, cakes, brownies, cupcakes and cookies delivered daily in Santo Domingo, Dominican Republic."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L5","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Mrty3Z-G3b9aGu6yuB88D"}
