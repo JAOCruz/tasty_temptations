@@ -44,7 +44,7 @@ function ProductCard({ product }: { product: Product }) {
           {product.comingSoon ? (
             <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-white p-5 text-center">
               <span className="text-4xl">📷</span>
-              <p className="font-heading text-sm uppercase leading-tight text-brand-black">
+              <p className="font-heading text-sm leading-tight text-brand-black">
                 ¡Foto próximamente! pero el sabor ya está listo para conquistarte.
               </p>
             </div>
