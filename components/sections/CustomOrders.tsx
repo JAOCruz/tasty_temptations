@@ -32,7 +32,7 @@ export function CustomOrders() {
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
-            <p className="text-center font-base text-sm text-brand-black">
+            <p className="rounded-base border-[3px] border-border bg-white px-4 py-2 text-center font-base text-sm text-brand-black shadow-[4px_4px_0_#222222]">
               💗 Brownie en forma de corazón
             </p>
           </div>
@@ -48,7 +48,9 @@ export function CustomOrders() {
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
-            <p className="text-center font-base text-sm text-brand-black">🍫 Mini brownies</p>
+            <p className="rounded-base border-[3px] border-border bg-white px-4 py-2 text-center font-base text-sm text-brand-black shadow-[4px_4px_0_#222222]">
+              🍫 Mini brownies
+            </p>
           </div>
 
           {/* Right column - carrot cupcakes */}
@@ -62,7 +64,9 @@ export function CustomOrders() {
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
-            <p className="text-center font-base text-sm text-brand-black">🧁 Carrot cupcakes</p>
+            <p className="rounded-base border-[3px] border-border bg-white px-4 py-2 text-center font-base text-sm text-brand-black shadow-[4px_4px_0_#222222]">
+              🧁 Carrot cupcakes
+            </p>
           </div>
         </div>
 
