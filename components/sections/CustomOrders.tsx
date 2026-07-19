@@ -22,45 +22,47 @@ export function CustomOrders() {
         {/* Images grid */}
         <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {/* Main image - brownie heart */}
-          <div className="relative aspect-[2/4] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[6px_6px_0_#222222] sm:row-span-2">
-            <Image
-              src="/illustrations/custom-orders/brownie-heart.png"
-              alt="Brownie en forma de corazón"
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, 50vw"
-            />
+          <div className="flex flex-col gap-2 sm:row-span-2">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[6px_6px_0_#222222]">
+              <Image
+                src="/illustrations/custom-orders/brownie-heart.png"
+                alt="Brownie en forma de corazón"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+            </div>
+            <p className="text-center font-base text-sm text-brand-black">
+              💗 Brownie en forma de corazón
+            </p>
           </div>
 
           {/* Right column - mini brownies */}
-          <div className="relative aspect-square overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[5px_5px_0_#222222]">
-            <Image
-              src="/illustrations/custom-orders/mini-brownies.jpg"
-              alt="Mini brownies"
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, 50vw"
-            />
+          <div className="flex flex-col gap-2">
+            <div className="relative aspect-[3/2] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[5px_5px_0_#222222]">
+              <Image
+                src="/illustrations/custom-orders/mini-brownies.jpg"
+                alt="Mini brownies"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+            </div>
+            <p className="text-center font-base text-sm text-brand-black">🍫 Mini brownies</p>
           </div>
 
           {/* Right column - carrot cupcakes */}
-          <div className="relative aspect-square overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[5px_5px_0_#222222]">
-            <Image
-              src="/illustrations/custom-orders/carrot-cupcakes.jpg"
-              alt="Carrot cupcakes"
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, 50vw"
-            />
-          </div>
-        </div>
-
-        {/* Photo captions */}
-        <div className="mb-6 grid grid-cols-1 gap-4 text-center sm:grid-cols-2">
-          <p className="font-base text-sm text-brand-black">💗 Brownie en forma de corazón</p>
-          <div className="flex flex-col gap-4">
-            <p className="font-base text-sm text-brand-black">🍫 Mini brownies</p>
-            <p className="font-base text-sm text-brand-black">🧁 Carrot cupcakes</p>
+          <div className="flex flex-col gap-2">
+            <div className="relative aspect-[3/2] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[5px_5px_0_#222222]">
+              <Image
+                src="/illustrations/custom-orders/carrot-cupcakes.jpg"
+                alt="Carrot cupcakes"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+            </div>
+            <p className="text-center font-base text-sm text-brand-black">🧁 Carrot cupcakes</p>
           </div>
         </div>
 
