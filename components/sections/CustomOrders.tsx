@@ -26,14 +26,14 @@ export function CustomOrders() {
 
         {/* Images grid */}
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {/* Main image - brownie heart */}
-          <div className="relative aspect-[3/4] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[6px_6px_0_#222222] sm:row-span-2">
+          {/* Main image - brownie heart, full width on top */}
+          <div className="relative aspect-[3/4] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[6px_6px_0_#222222] sm:col-span-2">
             <Image
               src="/illustrations/custom-orders/brownie-heart.png"
               alt="Brownie en forma de corazón"
               fill
               className="object-cover"
-              sizes="(max-width: 640px) 100vw, 50vw"
+              sizes="100vw"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-white/95 p-2 text-center">
               <p className="font-heading text-xs uppercase text-brand-black">
@@ -42,7 +42,7 @@ export function CustomOrders() {
             </div>
           </div>
 
-          {/* Right column - mini brownies */}
+          {/* Bottom row - mini brownies */}
           <div className="relative aspect-square overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[5px_5px_0_#222222]">
             <Image
               src="/illustrations/custom-orders/mini-brownies.jpg"
@@ -58,7 +58,7 @@ export function CustomOrders() {
             </div>
           </div>
 
-          {/* Right column - carrot cupcakes */}
+          {/* Bottom row - carrot cupcakes */}
           <div className="relative aspect-square overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[5px_5px_0_#222222]">
             <Image
               src="/illustrations/custom-orders/carrot-cupcakes.jpg"
