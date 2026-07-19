@@ -22,7 +22,7 @@ export function CustomOrders() {
         {/* Images grid */}
         <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {/* Main image - brownie heart */}
-          <div className="relative aspect-[3/4] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[6px_6px_0_#222222] sm:row-span-2">
+          <div className="relative aspect-[2/4] overflow-hidden rounded-base border-[3px] border-border bg-white shadow-[6px_6px_0_#222222] sm:row-span-2">
             <Image
               src="/illustrations/custom-orders/brownie-heart.png"
               alt="Brownie en forma de corazón"
