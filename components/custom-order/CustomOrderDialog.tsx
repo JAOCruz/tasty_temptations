@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Check, ArrowRight } from "lucide-react"
+import Turnstile from "react-turnstile"
 
 const contactOptions = [
   { id: "whatsapp", label: "WhatsApp", emoji: "📱" },
@@ -40,6 +41,7 @@ export function CustomOrderDialog({
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -64,6 +66,7 @@ export function CustomOrderDialog({
   const reset = () => {
     setStep(0)
     setSubmitted(false)
+    setTurnstileToken(null)
     setForm({
       name: "",
       phone: "",
@@ -94,6 +97,9 @@ export function CustomOrderDialog({
     if (step === 1) {
       return form.flavor.trim() && form.quantity.trim() && form.people.trim() && form.budget.trim()
     }
+    if (step === 2) {
+      return form.idea.trim() && !!turnstileToken
+    }
     return true
   }
 
@@ -109,6 +115,7 @@ export function CustomOrderDialog({
         body: JSON.stringify({
           ...form,
           _subject: `Nuevo pedido personalizado - ${form.name}`,
+          "cf-turnstile-response": turnstileToken,
         }),
       })
       if (response.ok) {
@@ -335,6 +342,13 @@ export function CustomOrderDialog({
                       onChange={(e) => update("notes", e.target.value)}
                       placeholder="Alergias, preferencias de entrega, etc."
                       rows={3}
+                    />
+                  </div>
+                  <div className="flex justify-center">
+                    <Turnstile
+                      sitekey="0x4AAAAAAD5Unh2KNu7SM6sx"
+                      onVerify={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken(null)}
                     />
                   </div>
                 </div>

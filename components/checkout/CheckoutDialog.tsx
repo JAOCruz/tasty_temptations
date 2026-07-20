@@ -3,6 +3,7 @@
 import { useState } from "react"
 import confetti from "canvas-confetti"
 import { Check, ChevronLeft, ChevronRight, PartyPopper } from "lucide-react"
+import Turnstile from "react-turnstile"
 import {
   Dialog,
   DialogContent,
@@ -63,6 +64,7 @@ export function CheckoutDialog({
   const [paymentMethod, setPaymentMethod] = useState("transfer")
   const [card, setCard] = useState({ number: "", expiry: "", cvc: "" })
   const [orderNumber, setOrderNumber] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   const subtotal = total()
   const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 250
@@ -81,8 +83,9 @@ export function CheckoutDialog({
       case "date":
         return date && timeSlot
       case "summary":
-      case "payment":
         return true
+      case "payment":
+        return !!turnstileToken
       default:
         return false
     }
@@ -121,7 +124,10 @@ export function CheckoutDialog({
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(orderPayload),
+        body: JSON.stringify({
+        ...orderPayload,
+        "cf-turnstile-response": turnstileToken,
+      }),
       })
       if (!response.ok) {
         const errorText = await response.text().catch(() => "")
@@ -149,6 +155,7 @@ export function CheckoutDialog({
     setPaymentMethod("transfer")
     setCard({ number: "", expiry: "", cvc: "" })
     setOrderNumber(null)
+    setTurnstileToken(null)
     onOpenChange(false)
   }
 
@@ -240,12 +247,21 @@ export function CheckoutDialog({
           )}
 
           {step === "payment" && (
-            <PaymentForm
-              method={paymentMethod}
-              onMethodChange={setPaymentMethod}
-              card={card}
-              onCardChange={setCard}
-            />
+            <div className="flex flex-col gap-4">
+              <PaymentForm
+                method={paymentMethod}
+                onMethodChange={setPaymentMethod}
+                card={card}
+                onCardChange={setCard}
+              />
+              <div className="flex justify-center">
+                <Turnstile
+                  sitekey="0x4AAAAAAD5Unh2KNu7SM6sx"
+                  onVerify={(token) => setTurnstileToken(token)}
+                  onExpire={() => setTurnstileToken(null)}
+                />
+              </div>
+            </div>
           )}
 
           {step === "success" && (
