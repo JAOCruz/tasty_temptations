@@ -24,7 +24,7 @@ export function CartItem({ item }: { item: CartItemType }) {
           <span className="font-heading text-sm leading-tight">
             {item.product.name}
           </span>
-          <span className="font-heading text-sm text-brand-yellow">
+          <span className="font-heading text-sm text-brand-black">
             {formatPrice(item.product.price * item.quantity)}
           </span>
         </div>

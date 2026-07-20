@@ -91,7 +91,7 @@ export function CartDrawer() {
               <Separator />
               <div className="flex justify-between text-xl">
                 <span className="font-heading">TOTAL</span>
-                <span className="font-heading text-brand-yellow">
+                <span className="font-heading text-brand-black">
                   {formatPrice(cartTotal)}
                 </span>
               </div>
