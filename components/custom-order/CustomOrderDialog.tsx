@@ -304,10 +304,10 @@ export function CustomOrderDialog({
                       ))}
                     </div>
                     <p className="rounded-base border-2 border-brand-yellow bg-brand-yellow/20 p-2 text-xs text-brand-black">
-                      <strong>Política de pago 50/50:</strong> solicitamos el 50% del total
-                      para comenzar a preparar tu pedido personalizado. Puedes pagar solo el
-                      50% ahora y el resto antes de la entrega, o el 100% de una sola vez si
-                      lo prefieres.
+                      <strong>Política de pago 50/50:</strong> los pedidos personalizados
+                      requieren un anticipo del 50% para reservar la fecha e iniciar su
+                      preparación. Puedes pagar el 50% al confirmar y el restante antes de la
+                      entrega, o realizar el pago completo desde el inicio.
                     </p>
                   </div>
                 </div>
@@ -404,10 +404,12 @@ export function CustomOrderDialog({
             <div className="w-full rounded-base border-2 border-brand-green bg-brand-green/20 p-5 text-left shadow-shadow">
               <p className="mb-2 font-heading text-lg">💳 Pago por transferencia</p>
               <p className="text-sm text-brand-black/80">
-                Para pedidos personalizados trabajamos con <strong>50% de adelanto</strong>{" "}
-                para comenzar a preparar tu pedido. Una vez aprobemos tu cotización, te
-                enviaremos los datos bancarios. Puedes pagar el 50% ahora y el resto antes de
-                la entrega, o el 100% de una sola vez si lo prefieres.
+                Los pedidos personalizados requieren un anticipo del <strong>50%</strong> para
+                reservar la fecha e iniciar su preparación.
+              </p>
+              <p className="mt-2 text-sm text-brand-black/80">
+                Puedes pagar el 50% al confirmar y el restante antes de la entrega, o realizar
+                el pago completo desde el inicio.
               </p>
             </div>
             <div className="w-full rounded-base border-2 border-border bg-brand-cream p-5 text-left shadow-shadow">
