@@ -42,8 +42,6 @@ const stepLabels: Record<Step, string> = {
   success: "Confirmación",
 }
 
-const FREE_DELIVERY_THRESHOLD = 1800
-
 export function CheckoutDialog({
   open,
   onOpenChange,
@@ -68,9 +66,6 @@ export function CheckoutDialog({
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   const subtotal = total()
-  const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 250
-  const orderTotal = subtotal + deliveryFee
-  const amountForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal)
 
   const canProceed = () => {
     switch (step) {
@@ -114,8 +109,8 @@ export function CheckoutDialog({
         total: item.product.price * item.quantity,
       })),
       subtotal,
-      deliveryFee,
-      orderTotal,
+      deliveryFee: "Por confirmar manualmente",
+      orderTotal: subtotal,
     }
 
     try {
@@ -304,6 +299,12 @@ export function CheckoutDialog({
                     Realiza la transferencia y envíanos el comprobante para confirmar.
                   </p>
                 )}
+                <Separator className="my-3" />
+                <p className="text-sm">
+                  Envío:
+                  <br />
+                  <strong>Por confirmar manualmente</strong>
+                </p>
               </div>
               {paymentMethod === "transfer" && <BankInfo />}
               <Button

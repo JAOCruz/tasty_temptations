@@ -8,8 +8,6 @@ import { formatPrice } from "@/lib/utils"
 import { timeSlots } from "./DeliveryCalendar"
 import { Truck } from "lucide-react"
 
-const FREE_DELIVERY_THRESHOLD = 1800
-
 export function OrderSummary({
   form,
   date,
@@ -27,19 +25,14 @@ export function OrderSummary({
 }) {
   const { items, total } = useCartStore()
   const subtotal = total()
-  const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 250
-  const orderTotal = subtotal + deliveryFee
-  const amountForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal)
 
   return (
     <div className="flex flex-col gap-4 animate-fade-in-up">
-      <div className={`rounded-base border-2 border-border p-3 shadow-shadow ${subtotal >= FREE_DELIVERY_THRESHOLD ? "bg-brand-green" : "bg-brand-yellow"}`}>
+      <div className="rounded-base border-2 border-border bg-brand-cream p-3 shadow-shadow">
         <div className="flex items-center gap-2">
           <Truck className="size-4 shrink-0" />
           <span className="font-heading text-sm">
-            {subtotal >= FREE_DELIVERY_THRESHOLD
-              ? "¡Tu pedido califica para envío gratis!"
-              : `Agrega ${formatPrice(amountForFreeDelivery)} más para envío gratis`}
+            El costo de envío se confirma manualmente por email o WhatsApp.
           </span>
         </div>
       </div>
@@ -64,16 +57,10 @@ export function OrderSummary({
           <span>Subtotal</span>
           <span className="font-heading">{formatPrice(subtotal)}</span>
         </div>
-        <div className="flex justify-between text-sm">
-          <span>Envío</span>
-          <span className="font-heading">
-            {deliveryFee === 0 ? "GRATIS" : formatPrice(deliveryFee)}
-          </span>
-        </div>
         <Separator className="my-2" />
         <div className="flex items-center justify-between rounded-base bg-brand-black p-3 text-lg text-white shadow-[4px_4px_0_#222222]">
           <span className="font-heading">TOTAL</span>
-          <span className="font-heading">{formatPrice(orderTotal)}</span>
+          <span className="font-heading">{formatPrice(subtotal)}</span>
         </div>
       </div>
 

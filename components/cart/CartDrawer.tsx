@@ -17,16 +17,11 @@ import { Separator } from "@/components/ui/separator"
 import { ShoppingBag, X, Truck } from "lucide-react"
 import { CheckoutDialog } from "@/components/checkout/CheckoutDialog"
 
-const FREE_DELIVERY_THRESHOLD = 1800
-
 export function CartDrawer() {
   const { items, isOpen, closeCart, total, clearCart } = useCartStore()
   const [checkoutOpen, setCheckoutOpen] = useState(false)
 
   const subtotal = total()
-  const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD || subtotal === 0 ? 0 : 250
-  const cartTotal = subtotal + deliveryFee
-  const amountForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal)
 
   return (
     <>
@@ -66,13 +61,11 @@ export function CartDrawer() {
 
           <DrawerFooter className="border-t-2 border-border p-4">
             {items.length > 0 && (
-              <div className={`rounded-base border-2 border-border p-3 shadow-shadow ${subtotal >= FREE_DELIVERY_THRESHOLD ? "bg-brand-green" : "bg-brand-yellow"}`}>
+              <div className="rounded-base border-2 border-border bg-brand-cream p-3 shadow-shadow">
                 <div className="flex items-center gap-2">
                   <Truck className="size-4 shrink-0" />
                   <span className="font-heading text-sm">
-                    {subtotal >= FREE_DELIVERY_THRESHOLD
-                      ? "¡Tu pedido califica para envío gratis!"
-                      : `Agrega RD$${amountForFreeDelivery} más para envío gratis`}
+                    El costo de envío se confirma manualmente por email o WhatsApp.
                   </span>
                 </div>
               </div>
@@ -82,17 +75,11 @@ export function CartDrawer() {
                 <span>Subtotal</span>
                 <span className="font-heading">{formatPrice(subtotal)}</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span>Envío</span>
-                <span className="font-heading">
-                  {deliveryFee === 0 ? "GRATIS" : formatPrice(deliveryFee)}
-                </span>
-              </div>
               <Separator />
               <div className="flex justify-between text-xl">
                 <span className="font-heading">TOTAL</span>
                 <span className="font-heading text-brand-black">
-                  {formatPrice(cartTotal)}
+                  {formatPrice(subtotal)}
                 </span>
               </div>
             </div>
