@@ -20,6 +20,10 @@ const contactOptions = [
   { id: "email", label: "Correo electrónico", emoji: "📧" },
 ]
 
+const paymentOptions = [
+  { id: "transfer", label: "Transferencia bancaria", emoji: "🏦" },
+]
+
 const steps = [
   { id: "order", title: "Pedido personalizado" },
   { id: "details", title: "Detalles" },
@@ -35,11 +39,13 @@ export function CustomOrderDialog({
 }) {
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({
     name: "",
     phone: "",
     email: "",
     contactMethod: "whatsapp",
+    paymentMethod: "transfer",
     product: "",
     date: "",
     flavor: "",
@@ -63,6 +69,7 @@ export function CustomOrderDialog({
       phone: "",
       email: "",
       contactMethod: "whatsapp",
+      paymentMethod: "transfer",
       product: "",
       date: "",
       flavor: "",
@@ -90,10 +97,33 @@ export function CustomOrderDialog({
     return true
   }
 
-  const handleSubmit = () => {
-    // TODO: connect to backend / email service
-    console.log("Custom order request:", form)
-    setSubmitted(true)
+  const handleSubmit = async () => {
+    setSubmitting(true)
+    try {
+      const response = await fetch(
+        "https://submit.formspark.io/form_v1_oSylX5yeY9GBJ30Cwl83wcT8",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            ...form,
+            _subject: `Nuevo pedido personalizado - ${form.name}`,
+          }),
+        }
+      )
+      if (response.ok) {
+        setSubmitted(true)
+      } else {
+        alert("Hubo un error al enviar la solicitud. Intenta de nuevo.")
+      }
+    } catch (error) {
+      alert("No se pudo enviar la solicitud. Verifica tu conexión.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -241,6 +271,29 @@ export function CustomOrderDialog({
                       placeholder="Ej: RD$2,000"
                     />
                   </div>
+                  <div className="grid gap-2">
+                    <Label>Método de pago *</Label>
+                    <div className="grid grid-cols-1 gap-2">
+                      {paymentOptions.map((option) => (
+                        <button
+                          key={option.id}
+                          type="button"
+                          onClick={() => update("paymentMethod", option.id)}
+                          className={`flex items-center justify-center gap-2 rounded-base border-[3px] px-3 py-2 text-sm transition-all ${
+                            form.paymentMethod === option.id
+                              ? "border-border bg-brand-green text-brand-black shadow-[3px_3px_0_#222222]"
+                              : "border-border bg-white hover:bg-brand-cream"
+                          }`}
+                        >
+                          <span>{option.emoji}</span>
+                          <span className="font-heading">{option.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <p className="text-xs text-brand-black/60">
+                      Próximamente añadiremos pago con tarjeta.
+                    </p>
+                  </div>
                 </div>
               )}
 
@@ -301,11 +354,11 @@ export function CustomOrderDialog({
                 </Button>
               ) : (
                 <Button
-                  disabled={!canProceed()}
+                  disabled={!canProceed() || submitting}
                   onClick={handleSubmit}
                   className="bg-brand-green text-brand-black hover:bg-brand-green/90"
                 >
-                  Enviar solicitud
+                  {submitting ? "Enviando..." : "Enviar solicitud"}
                   <Check className="ml-1 size-4" />
                 </Button>
               )}
@@ -323,6 +376,13 @@ export function CustomOrderDialog({
               <p className="text-brand-black/80">
                 Gracias por confiar en Tasty Temptations. Hemos recibido los detalles de tu
                 pedido personalizado.
+              </p>
+            </div>
+            <div className="w-full rounded-base border-2 border-brand-green bg-brand-green/20 p-5 text-left shadow-shadow">
+              <p className="mb-2 font-heading text-lg">💳 Pago por transferencia</p>
+              <p className="text-sm text-brand-black/80">
+                Una vez aprobemos tu cotización, te enviaremos los datos bancarios para que
+                realices la transferencia y confirmemos tu pedido.
               </p>
             </div>
             <div className="w-full rounded-base border-2 border-border bg-brand-cream p-5 text-left shadow-shadow">
