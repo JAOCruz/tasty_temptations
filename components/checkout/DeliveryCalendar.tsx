@@ -1,6 +1,6 @@
 "use client"
 
-import { addDays, isSunday, startOfTomorrow } from "date-fns"
+import { addDays, isSunday, startOfDay } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 
@@ -14,6 +14,15 @@ export type TimeSlot = (typeof timeSlots)[number]
 
 export { timeSlots }
 
+function getMinimumDeliveryDate(): Date {
+  const today = startOfDay(new Date())
+  let minDate = addDays(today, 2)
+  while (isSunday(minDate)) {
+    minDate = addDays(minDate, 1)
+  }
+  return minDate
+}
+
 export function DeliveryCalendar({
   date,
   onSelect,
@@ -25,13 +34,12 @@ export function DeliveryCalendar({
   timeSlot: string
   onTimeSlotChange: (slot: string) => void
 }) {
-  const tomorrow = startOfTomorrow()
-  const maxDate = addDays(new Date(), 7)
+  const minDate = getMinimumDeliveryDate()
+  const maxDate = addDays(new Date(), 14)
 
   const isDateDisabled = (day: Date) => {
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    return day < today || day > maxDate || isSunday(day)
+    const d = startOfDay(day)
+    return d < minDate || d > maxDate || isSunday(d)
   }
 
   return (
@@ -47,7 +55,7 @@ export function DeliveryCalendar({
             selected={date}
             onSelect={onSelect}
             disabled={isDateDisabled}
-            defaultMonth={tomorrow}
+            defaultMonth={minDate}
           />
         </div>
       </div>

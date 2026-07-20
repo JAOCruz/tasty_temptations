@@ -54,8 +54,8 @@ function Calendar({
           "size-9 p-0 font-base aria-selected:opacity-100",
         ),
         selected:
-          "bg-black text-white rounded-base",
-        today: "bg-secondary-background text-foreground",
+          "bg-brand-purple text-white rounded-base font-bold",
+        today: "bg-secondary-background text-foreground border-2 border-brand-purple",
         outside: "text-main-foreground opacity-50",
         disabled: "text-main-foreground opacity-50 rounded-base",
         range_start: "bg-black text-white rounded-base",

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import confetti from "canvas-confetti"
-import { Check, ChevronLeft, ChevronRight, PartyPopper, Truck } from "lucide-react"
+import { Check, ChevronLeft, ChevronRight, PartyPopper } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -60,7 +60,7 @@ export function CheckoutDialog({
   })
   const [date, setDate] = useState<Date | undefined>(startOfTomorrow())
   const [timeSlot, setTimeSlot] = useState("morning")
-  const [paymentMethod, setPaymentMethod] = useState("card")
+  const [paymentMethod, setPaymentMethod] = useState("transfer")
   const [card, setCard] = useState({ number: "", expiry: "", cvc: "" })
   const [orderNumber, setOrderNumber] = useState<string | null>(null)
 
@@ -142,7 +142,7 @@ export function CheckoutDialog({
     setForm({ name: "", phone: "", address: "", neighborhood: "", notes: "" })
     setDate(startOfTomorrow())
     setTimeSlot("morning")
-    setPaymentMethod("card")
+    setPaymentMethod("transfer")
     setCard({ number: "", expiry: "", cvc: "" })
     setOrderNumber(null)
     onOpenChange(false)
@@ -232,19 +232,7 @@ export function CheckoutDialog({
           )}
 
           {step === "summary" && (
-            <>
-              <div className={`mb-4 rounded-base border-2 border-border p-3 shadow-shadow ${subtotal >= FREE_DELIVERY_THRESHOLD ? "bg-brand-green" : "bg-brand-yellow"}`}>
-                <div className="flex items-center gap-2">
-                  <Truck className="size-5 shrink-0" />
-                  <span className="font-heading text-sm">
-                    {subtotal >= FREE_DELIVERY_THRESHOLD
-                      ? "¡Tu pedido califica para envío gratis!"
-                      : `Agrega ${formatPrice(amountForFreeDelivery)} más para envío gratis`}
-                  </span>
-                </div>
-              </div>
-              <OrderSummary form={form} date={date} timeSlot={timeSlot} />
-            </>
+            <OrderSummary form={form} date={date} timeSlot={timeSlot} />
           )}
 
           {step === "payment" && (
@@ -286,7 +274,6 @@ export function CheckoutDialog({
                   Método de pago:
                   <br />
                   <strong>
-                    {paymentMethod === "card" && "Tarjeta (pendiente de procesamiento)"}
                     {paymentMethod === "transfer" && "Transferencia bancaria"}
                     {paymentMethod === "cash" && "Efectivo al entregar"}
                   </strong>

@@ -73,7 +73,7 @@ export function OrderSummary({
         <Separator className="my-2" />
         <div className="flex justify-between text-lg">
           <span className="font-heading">TOTAL</span>
-          <span className="font-heading text-brand-yellow">
+          <span className="font-heading text-brand-black">
             {formatPrice(orderTotal)}
           </span>
         </div>

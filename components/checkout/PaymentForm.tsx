@@ -1,11 +1,10 @@
 "use client"
 
-import { CreditCard, DollarSign, Landmark } from "lucide-react"
+import { DollarSign, Landmark } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 const paymentMethods = [
-  { id: "card", label: "Tarjeta", icon: CreditCard },
   { id: "transfer", label: "Transferencia", icon: Landmark },
   { id: "cash", label: "Efectivo", icon: DollarSign },
 ]
