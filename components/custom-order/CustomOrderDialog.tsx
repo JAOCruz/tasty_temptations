@@ -287,8 +287,11 @@ export function CustomOrderDialog({
                         </button>
                       ))}
                     </div>
-                    <p className="text-xs text-brand-black/60">
-                      Próximamente añadiremos pago con tarjeta.
+                    <p className="rounded-base border-2 border-brand-yellow bg-brand-yellow/20 p-2 text-xs text-brand-black">
+                      <strong>Política de pago 50/50:</strong> solicitamos el 50% del total
+                      para comenzar a preparar tu pedido personalizado. Puedes pagar solo el
+                      50% ahora y el resto antes de la entrega, o el 100% de una sola vez si
+                      lo prefieres.
                     </p>
                   </div>
                 </div>
@@ -378,8 +381,10 @@ export function CustomOrderDialog({
             <div className="w-full rounded-base border-2 border-brand-green bg-brand-green/20 p-5 text-left shadow-shadow">
               <p className="mb-2 font-heading text-lg">💳 Pago por transferencia</p>
               <p className="text-sm text-brand-black/80">
-                Una vez aprobemos tu cotización, te enviaremos los datos bancarios para que
-                realices la transferencia y confirmemos tu pedido.
+                Para pedidos personalizados trabajamos con <strong>50% de adelanto</strong>{" "}
+                para comenzar a preparar tu pedido. Una vez aprobemos tu cotización, te
+                enviaremos los datos bancarios. Puedes pagar el 50% ahora y el resto antes de
+                la entrega, o el 100% de una sola vez si lo prefieres.
               </p>
             </div>
             <div className="w-full rounded-base border-2 border-border bg-brand-cream p-5 text-left shadow-shadow">
