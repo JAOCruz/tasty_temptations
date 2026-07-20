@@ -71,11 +71,9 @@ export function OrderSummary({
           </span>
         </div>
         <Separator className="my-2" />
-        <div className="flex justify-between text-lg">
+        <div className="flex items-center justify-between rounded-base bg-brand-black p-3 text-lg text-white shadow-[4px_4px_0_#222222]">
           <span className="font-heading">TOTAL</span>
-          <span className="font-heading text-brand-black">
-            {formatPrice(orderTotal)}
-          </span>
+          <span className="font-heading">{formatPrice(orderTotal)}</span>
         </div>
       </div>
 
