@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Check, ArrowRight } from "lucide-react"
 import Turnstile from "react-turnstile"
+import { BankInfo } from "@/components/shared/BankInfo"
 
 const contactOptions = [
   { id: "whatsapp", label: "WhatsApp", emoji: "📱" },
@@ -412,6 +413,7 @@ export function CustomOrderDialog({
                 el pago completo desde el inicio.
               </p>
             </div>
+            <BankInfo />
             <div className="w-full rounded-base border-2 border-border bg-brand-cream p-5 text-left shadow-shadow">
               <p className="mb-2 font-heading text-lg">¿Qué sucede ahora?</p>
               <ul className="space-y-2 text-sm text-brand-black/80">

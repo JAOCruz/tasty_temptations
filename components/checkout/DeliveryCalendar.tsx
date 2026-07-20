@@ -1,6 +1,6 @@
 "use client"
 
-import { addDays, isSunday, startOfDay } from "date-fns"
+import { addDays, isSaturday, isSunday, startOfDay } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 
@@ -15,9 +15,24 @@ export type TimeSlot = (typeof timeSlots)[number]
 export { timeSlots }
 
 function getMinimumDeliveryDate(): Date {
-  const today = startOfDay(new Date())
+  const now = new Date()
+  const today = startOfDay(now)
+  const dayOfWeek = now.getDay()
+  const hour = now.getHours()
+
+  // Friday after 10am, Saturday or Sunday: next Monday
+  if (dayOfWeek === 5 && hour >= 10) {
+    return addDays(today, 3)
+  }
+  if (dayOfWeek === 6) {
+    return addDays(today, 2)
+  }
+  if (dayOfWeek === 0) {
+    return addDays(today, 1)
+  }
+
   let minDate = addDays(today, 2)
-  while (isSunday(minDate)) {
+  while (isSaturday(minDate) || isSunday(minDate)) {
     minDate = addDays(minDate, 1)
   }
   return minDate
@@ -38,7 +53,7 @@ export function DeliveryCalendar({
 
   const isDateDisabled = (day: Date) => {
     const d = startOfDay(day)
-    return d < minDate || isSunday(d)
+    return d < minDate || isSaturday(d) || isSunday(d)
   }
 
   return (
@@ -57,6 +72,10 @@ export function DeliveryCalendar({
             defaultMonth={minDate}
           />
         </div>
+        <p className="mt-2 text-xs text-brand-black/70">
+          Entregamos de lunes a viernes. Los pedidos requieren mínimo 48 horas de
+          anticipación. Los viernes solo aceptamos pedidos hasta las 10:00 a.m.
+        </p>
       </div>
       <div>
         <h3 className="mb-3 font-heading text-lg">Selecciona la hora</h3>

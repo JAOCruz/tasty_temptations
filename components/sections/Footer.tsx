@@ -1,7 +1,15 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Marquee } from "@/components/shared/Marquee"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { BankInfo } from "@/components/shared/BankInfo"
 
 const footerLinks = [
   { label: "Menú", href: "#menu" },
@@ -10,6 +18,8 @@ const footerLinks = [
 ]
 
 export function Footer() {
+  const [bankOpen, setBankOpen] = useState(false)
+
   return (
     <footer id="footer" className="bg-pop-dots-green pt-16">
       <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6 lg:px-8">
@@ -39,12 +49,31 @@ export function Footer() {
                 {link.label}
               </a>
             ))}
+            <button
+              onClick={() => setBankOpen(true)}
+              className="flex items-center gap-2 rounded-base border-[3px] border-border bg-white px-4 py-2 font-heading text-sm uppercase text-brand-black shadow-[4px_4px_0_#222222] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-purple hover:text-white hover:shadow-[6px_6px_0_#222222]"
+            >
+              Datos bancarios
+            </button>
           </div>
           <p className="text-sm text-brand-black/70">
             © 2025 Tasty Temptations • Santo Domingo, República Dominicana.
           </p>
         </div>
       </div>
+
+      <Dialog open={bankOpen} onOpenChange={setBankOpen}>
+        <DialogContent className="max-w-md border-[3px] border-border bg-white p-0 shadow-[6px_6px_0_#222222]">
+          <DialogHeader className="border-b-2 border-border bg-brand-cream p-4">
+            <DialogTitle className="font-heading text-xl uppercase">
+              Datos para transferencia
+            </DialogTitle>
+          </DialogHeader>
+          <div className="p-4">
+            <BankInfo />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <div className="border-t-2 border-brand-black bg-brand-black py-2.5">
         <Marquee className="border-none" speed={20}>

@@ -30,6 +30,7 @@ import { es } from "date-fns/locale"
 import { DeliveryCalendar, timeSlots } from "./DeliveryCalendar"
 import { OrderSummary } from "./OrderSummary"
 import { PaymentForm } from "./PaymentForm"
+import { BankInfo } from "@/components/shared/BankInfo"
 
 type Step = "details" | "date" | "summary" | "payment" | "success"
 
@@ -300,10 +301,11 @@ export function CheckoutDialog({
                 </p>
                 {paymentMethod === "transfer" && (
                   <p className="mt-2 text-xs text-brand-black/70">
-                    Te contactaremos para enviarte los datos bancarios y confirmar tu pedido.
+                    Realiza la transferencia y envíanos el comprobante para confirmar.
                   </p>
                 )}
               </div>
+              {paymentMethod === "transfer" && <BankInfo />}
               <Button
                 disabled
                 className="w-full bg-brand-green text-brand-black hover:bg-brand-green/90"
