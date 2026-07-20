@@ -114,10 +114,19 @@ export function CustomOrderDialog({
       if (response.ok) {
         setSubmitted(true)
       } else {
-        alert("Hubo un error al enviar la solicitud. Intenta de nuevo.")
+        const errorText = await response.text().catch(() => "")
+        console.error("Formspark error:", response.status, errorText)
+        alert(
+          `Formspark no pudo recibir el pedido (error ${response.status}). ` +
+            `Por favor revisa la configuración del formulario o contáctanos por WhatsApp.`
+        )
       }
     } catch (error) {
-      alert("No se pudo enviar la solicitud. Verifica tu conexión.")
+      console.error("Network error:", error)
+      alert(
+        "No se pudo enviar la solicitud por problemas de conexión. " +
+          "Por favor contáctanos por WhatsApp."
+      )
     } finally {
       setSubmitting(false)
     }

@@ -115,7 +115,7 @@ export function CheckoutDialog({
     }
 
     try {
-      await fetch("https://submit-form.com/1Qk2wvqzQ", {
+      const response = await fetch("https://submit-form.com/1Qk2wvqzQ", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,6 +123,10 @@ export function CheckoutDialog({
         },
         body: JSON.stringify(orderPayload),
       })
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => "")
+        console.error("Formspark error:", response.status, errorText)
+      }
     } catch (error) {
       console.error("Failed to submit order to Formspark:", error)
     }
