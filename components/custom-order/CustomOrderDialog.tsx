@@ -100,20 +100,17 @@ export function CustomOrderDialog({
   const handleSubmit = async () => {
     setSubmitting(true)
     try {
-      const response = await fetch(
-        "https://submit.formspark.io/form_v1_oSylX5yeY9GBJ30Cwl83wcT8",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            ...form,
-            _subject: `Nuevo pedido personalizado - ${form.name}`,
-          }),
-        }
-      )
+      const response = await fetch("https://submit-form.com/1Qk2wvqzQ", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          _subject: `Nuevo pedido personalizado - ${form.name}`,
+        }),
+      })
       if (response.ok) {
         setSubmitted(true)
       } else {

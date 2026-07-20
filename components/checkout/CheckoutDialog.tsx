@@ -88,9 +88,45 @@ export function CheckoutDialog({
     }
   }
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     const number = Math.floor(1000 + Math.random() * 9000).toString()
     setOrderNumber(number)
+
+    const orderPayload = {
+      _subject: `Nuevo pedido #${number} - ${form.name}`,
+      orderNumber: number,
+      name: form.name,
+      phone: form.phone,
+      address: form.address,
+      neighborhood: form.neighborhood,
+      notes: form.notes,
+      deliveryDate: date ? format(date, "EEEE, MMMM do", { locale: es }) : "",
+      timeSlot: timeSlots.find((s) => s.id === timeSlot)?.range,
+      paymentMethod,
+      items: items.map((item) => ({
+        name: item.product.name,
+        quantity: item.quantity,
+        price: item.product.price,
+        total: item.product.price * item.quantity,
+      })),
+      subtotal,
+      deliveryFee,
+      orderTotal,
+    }
+
+    try {
+      await fetch("https://submit-form.com/1Qk2wvqzQ", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(orderPayload),
+      })
+    } catch (error) {
+      console.error("Failed to submit order to Formspark:", error)
+    }
+
     confetti({
       particleCount: 150,
       spread: 70,
@@ -245,6 +281,21 @@ export function CheckoutDialog({
                     {timeSlots.find((s) => s.id === timeSlot)?.range}
                   </strong>
                 </p>
+                <Separator className="my-3" />
+                <p className="text-sm">
+                  Método de pago:
+                  <br />
+                  <strong>
+                    {paymentMethod === "card" && "Tarjeta (pendiente de procesamiento)"}
+                    {paymentMethod === "transfer" && "Transferencia bancaria"}
+                    {paymentMethod === "cash" && "Efectivo al entregar"}
+                  </strong>
+                </p>
+                {paymentMethod === "transfer" && (
+                  <p className="mt-2 text-xs text-brand-black/70">
+                    Te contactaremos para enviarte los datos bancarios y confirmar tu pedido.
+                  </p>
+                )}
               </div>
               <Button
                 disabled

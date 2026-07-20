@@ -1,11 +1,12 @@
 "use client"
 
-import { CreditCard, DollarSign } from "lucide-react"
+import { CreditCard, DollarSign, Landmark } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 const paymentMethods = [
   { id: "card", label: "Tarjeta", icon: CreditCard },
+  { id: "transfer", label: "Transferencia", icon: Landmark },
   { id: "cash", label: "Efectivo", icon: DollarSign },
 ]
 
@@ -74,6 +75,15 @@ export function PaymentForm({
               />
             </div>
           </div>
+        </div>
+      )}
+
+      {method === "transfer" && (
+        <div className="rounded-base border-2 border-border bg-white p-4 shadow-shadow text-center">
+          <p className="font-heading">Paga por transferencia bancaria</p>
+          <p className="mt-1 text-sm text-brand-black/70">
+            Te enviaremos los datos bancarios para confirmar tu pedido.
+          </p>
         </div>
       )}
 
