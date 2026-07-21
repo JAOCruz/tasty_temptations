@@ -22,7 +22,7 @@ export function Navbar() {
     <nav className="fixed top-0 z-50 w-full border-b-[3px] border-brand-black bg-brand-purple">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#" className="flex items-center gap-2">
-          <div className="flex size-14 items-center justify-center rounded-full border-[3px] border-brand-black bg-brand-cream shadow-[3px_3px_0_#222222]">
+          <div className="flex size-14 items-center justify-center rounded-full border-[3px] border-brand-black bg-brand-cream shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
             <Image
               src="/favicon.png"
               alt="Tasty Temptations"

@@ -3,7 +3,12 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Marquee } from "@/components/shared/Marquee"
-import { NeoSparkles } from "@/components/shared/NeoSparkles"
+import {
+  CuteCupcake,
+  CuteHeart,
+  CuteRoll,
+  CuteStar,
+} from "@/components/shared/CuteDecorations"
 import {
   ArrowRight,
   MapPin,
@@ -28,19 +33,6 @@ const heroDesserts = [
   },
 ]
 
-const floatingDesserts = [
-  {
-    src: "/illustrations/hero-pop/cake.png",
-    alt: "Cake pop-art",
-    className: "absolute right-0 top-0 z-10 hidden w-20 rotate-6 md:-right-16 md:block lg:w-24 lg:-right-20",
-  },
-  {
-    src: "/illustrations/hero-pop/carrot-cake.png",
-    alt: "Carrot cake pop-art",
-    className: "absolute bottom-16 right-0 z-10 hidden w-16 -rotate-12 md:-right-12 md:block lg:w-20 lg:-right-16",
-  },
-]
-
 const bottomTags = [
   { label: "Cheesecakes", icon: "/favicon.png" },
   { label: "Brownies", icon: "/illustrations/hero-pop/brownies.png" },
@@ -57,14 +49,11 @@ export function Hero() {
         <div className="bg-pop-dots-cream" />
       </div>
 
-      {/* Decorative grid lines */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block">
-        <div className="absolute left-0 top-[42%] h-[3px] w-full bg-brand-black" />
-        <div className="absolute left-[55%] top-0 h-full w-[3px] bg-brand-black" />
-      </div>
-
-      {/* Neo-brutalist sparkles & talk boxes */}
-      <NeoSparkles variant="hero" className="z-0" />
+      {/* Cute floating decorations */}
+      <CuteCupcake className="absolute left-4 top-24 z-0 h-16 w-16 animate-wiggle opacity-90 md:left-12 md:top-32 md:h-24 md:w-24" />
+      <CuteHeart className="absolute right-8 top-20 z-0 h-14 w-14 animate-float-slow opacity-90 md:right-24 md:top-28 md:h-20 md:w-20" />
+      <CuteRoll className="absolute bottom-32 left-8 z-0 h-16 w-16 animate-float-slow-reverse opacity-90 md:bottom-40 md:left-20 md:h-24 md:w-24" />
+      <CuteStar className="absolute right-6 top-1/2 z-0 h-10 w-10 animate-spin-slow opacity-90 md:right-32 md:h-14 md:w-14" />
 
       {/* Main content */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6 lg:px-8">
@@ -72,7 +61,7 @@ export function Hero() {
         <div className="grid flex-1 grid-cols-1 items-end gap-6 md:grid-cols-[55%_45%] md:gap-8">
           {/* Top left - Title & badge */}
           <div className="flex flex-col items-center gap-4 pb-4 text-center md:items-start md:pb-8 md:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border-[3px] border-border bg-white px-4 py-1.5 shadow-[4px_4px_0_#222222]">
+            <div className="inline-flex items-center gap-2 rounded-full border-[3px] border-border bg-white px-4 py-1.5 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
               <CakeSlice className="size-4 text-brand-purple" />
               <span className="font-heading text-xs uppercase tracking-wider">
                 Santo Domingo, DR
@@ -83,7 +72,7 @@ export function Hero() {
               <br />
               TEMPTATIONS
             </h1>
-            <div className="rounded-full border-[3px] border-border bg-brand-yellow px-6 py-2 shadow-[5px_5px_0_#222222]">
+            <div className="rounded-full border-[3px] border-border bg-brand-yellow px-6 py-2 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
               <span className="font-heading text-xs uppercase tracking-wider text-brand-black sm:text-sm">
                 Tentación horneada fresca. Nada de stock, todo hecho para ti.
               </span>
@@ -95,7 +84,7 @@ export function Hero() {
 
           {/* Top right - value prop */}
           <div className="relative hidden h-full flex-col items-end justify-end pb-4 pr-4 md:flex md:pb-8">
-            <div className="max-w-[260px] rotate-2 rounded-base border-[3px] border-border bg-white p-4 shadow-[5px_5px_0_#222222]">
+            <div className="max-w-[260px] rotate-2 rounded-[1.25rem] border-[3px] border-border bg-white p-4 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
               <p className="font-heading text-sm">
                 Pide con 48 horas de antelación, así todo sale fresco del horno. ¿Lo necesitas antes? Pregúntanos.
               </p>
@@ -119,7 +108,7 @@ export function Hero() {
                       alt={dessert.alt}
                       fill
                       priority
-                      className="pop-art-img rounded-full bg-white object-cover"
+                      className="cute-img rounded-full bg-white object-cover"
                     />
                   </div>
                 ) : (
@@ -128,7 +117,7 @@ export function Hero() {
                     alt={dessert.alt}
                     width={200}
                     height={200}
-                    className="pop-art-img rounded-full bg-white"
+                    className="cute-img rounded-full bg-white"
                   />
                 )}
               </div>
@@ -137,23 +126,12 @@ export function Hero() {
 
           {/* Bottom right - CTA */}
           <div className="relative flex flex-col items-center justify-center gap-5 px-4 text-center md:items-start md:justify-start md:pl-10 md:pt-8 md:text-left lg:pl-14">
-            {floatingDesserts.map((dessert) => (
-              <div key={dessert.alt} className={dessert.className}>
-                <Image
-                  src={dessert.src}
-                  alt={dessert.alt}
-                  width={120}
-                  height={120}
-                  className="pop-art-img rounded-full bg-white"
-                />
-              </div>
-            ))}
             <p className="max-w-sm font-base text-base text-brand-black sm:text-lg">
               Tentaciones recién horneadas, con delivery o pickup en Santo Domingo.
               Cheesecakes, brownies, cinnamon rolls y más pecados deliciosos.
             </p>
             <a href="#menu">
-              <Button className="border-[3px] border-border bg-brand-black px-8 py-6 font-heading text-lg uppercase text-white shadow-[5px_5px_0_#222222] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-black hover:shadow-[8px_8px_0_#222222]">
+              <Button className="rounded-full border-[3px] border-border bg-brand-black px-8 py-6 font-heading text-lg uppercase text-white shadow-[3px_3px_0_rgba(34,34,34,0.85)] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-black hover:shadow-[5px_5px_0_rgba(34,34,34,0.85)]">
                 PIDE AHORA
                 <ArrowRight className="ml-2 size-5" />
               </Button>
@@ -162,7 +140,7 @@ export function Hero() {
               {bottomTags.map((tag) => (
                 <span
                   key={tag.label}
-                  className="pop-art-tag"
+                  className="cute-tag"
                 >
                   <Image
                     src={tag.icon}
@@ -190,7 +168,7 @@ export function Hero() {
           </span>
           <span className="text-brand-yellow">★</span>
           <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
-            Delivery gratis en pedidos desde RD$1,800 en zona metropolitana.
+            El costo de envío se confirma por email o WhatsApp.
           </span>
           <span className="text-brand-yellow">★</span>
         </Marquee>

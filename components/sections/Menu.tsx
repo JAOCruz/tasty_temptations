@@ -37,10 +37,10 @@ function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <Card className="group relative overflow-hidden border-[3px] border-border bg-white shadow-[5px_5px_0_#222222] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0_#222222]">
+    <Card className="group relative overflow-hidden rounded-[1.25rem] border-[3px] border-border bg-white shadow-[3px_3px_0_rgba(34,34,34,0.85)] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0_rgba(34,34,34,0.85)]">
       <CardContent className="flex flex-col gap-4 p-4">
         {/* Image container */}
-        <div className="product-pop-art relative aspect-square w-full overflow-hidden rounded-base border-[3px] border-border bg-pop-dots-white shadow-[4px_4px_0_#222222]">
+        <div className="product-pop-art relative aspect-square w-full overflow-hidden rounded-[1.25rem] border-[3px] border-border bg-pop-dots-white shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
           {product.comingSoon ? (
             <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-white p-5 text-center">
               <span className="text-4xl">📷</span>
@@ -60,7 +60,7 @@ function ProductCard({ product }: { product: Product }) {
           )}
           {/* Category badge */}
           <div className="absolute left-3 top-3">
-            <Badge className="border-[3px] border-border bg-brand-yellow text-xs uppercase text-brand-black shadow-[3px_3px_0_#222222]">
+            <Badge className="rounded-full border-[3px] border-border bg-brand-yellow text-xs uppercase text-brand-black shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
               {product.category}
             </Badge>
           </div>
@@ -108,14 +108,14 @@ function ProductCard({ product }: { product: Product }) {
               </p>
             )}
           </div>
-          <span className="shrink-0 rounded-base border-[3px] border-border bg-brand-purple px-2.5 py-1 font-heading text-sm text-white shadow-[3px_3px_0_#222222]">
+          <span className="shrink-0 rounded-full border-[3px] border-border bg-brand-purple px-2.5 py-1 font-heading text-sm text-white shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
             {formatPrice(product.price)}
           </span>
         </div>
 
         {/* Quantity + Add to cart */}
         <div className="mt-auto flex items-center gap-2">
-          <div className="flex items-center overflow-hidden rounded-base border-[3px] border-border shadow-[4px_4px_0_#222222]">
+          <div className="flex items-center overflow-hidden rounded-[1.25rem] border-[3px] border-border shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
             <Button
               variant="noShadow"
               size="icon"
@@ -143,7 +143,7 @@ function ProductCard({ product }: { product: Product }) {
             </Button>
           </div>
           <Button
-            className={`flex-1 border-[3px] border-border bg-brand-green font-heading text-sm uppercase text-brand-black shadow-[4px_4px_0_#222222] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-green/90 hover:shadow-[6px_6px_0_#222222] ${
+            className={`flex-1 rounded-[1.25rem] border-[3px] border-border bg-brand-green font-heading text-sm uppercase text-brand-black shadow-[3px_3px_0_rgba(34,34,34,0.85)] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:bg-brand-green/90 hover:shadow-[5px_5px_0_rgba(34,34,34,0.85)] ${
               adding ? "animate-pop" : ""
             }`}
             onClick={handleAdd}
@@ -170,7 +170,7 @@ export function Menu() {
       <NeoSparkles variant="menu" />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <div className="mx-auto inline-block rounded-base border-[3px] border-border bg-white p-6 shadow-[6px_6px_0_#222222] sm:p-8">
+          <div className="mx-auto inline-block rounded-[1.25rem] border-[3px] border-border bg-white p-6 shadow-[3px_3px_0_rgba(34,34,34,0.85)] sm:p-8">
             <span className="pop-art-sticker pop-art-sticker-green mb-4 inline-flex rotate-2">
               Menú fresco
             </span>
@@ -188,12 +188,12 @@ export function Menu() {
           onValueChange={setActiveCategory}
           className="mb-12 w-full"
         >
-          <TabsList className="flex h-auto min-h-[3rem] w-full flex-wrap justify-center gap-2 rounded-base border-[3px] border-border bg-white p-2 shadow-[5px_5px_0_#222222]">
+          <TabsList className="flex h-auto min-h-[3rem] w-full flex-wrap justify-center gap-2 rounded-[1.25rem] border-[3px] border-border bg-white p-2 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
             {categories.map((category) => (
               <TabsTrigger
                 key={category}
                 value={category}
-                className="rounded-base border-[3px] border-transparent px-4 py-2 font-heading text-sm uppercase text-foreground transition-all data-[state=active]:border-border data-[state=active]:bg-brand-green data-[state=active]:text-brand-black data-[state=active]:shadow-[4px_4px_0_#222222]"
+                className="rounded-full border-[3px] border-transparent px-4 py-2 font-heading text-sm uppercase text-foreground transition-all data-[state=active]:border-border data-[state=active]:bg-brand-green data-[state=active]:text-brand-black data-[state=active]:shadow-[3px_3px_0_rgba(34,34,34,0.85)]"
               >
                 {category}
               </TabsTrigger>
