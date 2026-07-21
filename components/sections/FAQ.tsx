@@ -37,10 +37,15 @@ const faqs = [
     question: "¿Qué métodos de pago aceptan?",
     answer: (
       <>
-        <p className="mb-2">Aceptamos:</p>
-        <ul className="list-inside list-disc space-y-1">
-          <li>Transferencia bancaria.</li>
-        </ul>
+        <p className="mb-2">Actualmente aceptamos transferencia bancaria.</p>
+        <p className="mb-2">
+          ¡Muy pronto estaremos habilitando más opciones de pago para hacer tu
+          experiencia aún más fácil!
+        </p>
+        <p>
+          Si tienes alguna duda o necesitas ayuda con tu pago, no dudes en
+          contactarnos. Estaremos encantados de ayudarte💚
+        </p>
       </>
     ),
   },
