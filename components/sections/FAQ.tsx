@@ -40,7 +40,6 @@ const faqs = [
         <p className="mb-2">Aceptamos:</p>
         <ul className="list-inside list-disc space-y-1">
           <li>Transferencia bancaria.</li>
-          <li>Efectivo para pedidos Pick Up.</li>
         </ul>
       </>
     ),
