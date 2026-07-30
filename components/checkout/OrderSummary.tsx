@@ -41,11 +41,14 @@ export function OrderSummary({
         <h3 className="mb-3 font-heading text-lg">Productos</h3>
         {items.map((item) => (
           <div
-            key={item.product.id}
+            key={`${item.product.id}-${item.flavor ?? "default"}`}
             className="flex justify-between py-2 text-sm"
           >
             <span>
               {item.product.emoji} {item.product.name} x{item.quantity}
+              {item.flavor && (
+                <span className="ml-1 text-xs text-brand-purple">({item.flavor})</span>
+              )}
             </span>
             <span className="font-heading">
               {formatPrice(item.product.price * item.quantity)}

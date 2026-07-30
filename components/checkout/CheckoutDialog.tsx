@@ -104,6 +104,7 @@ export function CheckoutDialog({
       paymentMethod,
       items: items.map((item) => ({
         name: item.product.name,
+        flavor: item.flavor,
         quantity: item.quantity,
         price: item.product.price,
         total: item.product.price * item.quantity,

@@ -5,14 +5,15 @@ import { Product } from "@/lib/data"
 export type CartItem = {
   product: Product
   quantity: number
+  flavor?: string
 }
 
 type CartState = {
   items: CartItem[]
   isOpen: boolean
-  addItem: (product: Product, quantity: number) => void
-  removeItem: (productId: number) => void
-  updateQuantity: (productId: number, quantity: number) => void
+  addItem: (product: Product, quantity: number, flavor?: string) => void
+  removeItem: (productId: number, flavor?: string) => void
+  updateQuantity: (productId: number, quantity: number, flavor?: string) => void
   clearCart: () => void
   openCart: () => void
   closeCart: () => void
@@ -21,45 +22,50 @@ type CartState = {
   itemCount: () => number
 }
 
+const itemMatches = (item: CartItem, productId: number, flavor?: string) =>
+  item.product.id === productId && item.flavor === flavor
+
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
       isOpen: false,
 
-      addItem: (product, quantity) => {
+      addItem: (product, quantity, flavor) => {
         set((state) => {
-          const existing = state.items.find(
-            (item) => item.product.id === product.id,
+          const existing = state.items.find((item) =>
+            itemMatches(item, product.id, flavor),
           )
           if (existing) {
             return {
               items: state.items.map((item) =>
-                item.product.id === product.id
+                itemMatches(item, product.id, flavor)
                   ? { ...item, quantity: item.quantity + quantity }
                   : item,
               ),
             }
           }
-          return { items: [...state.items, { product, quantity }] }
+          return { items: [...state.items, { product, quantity, flavor }] }
         })
         get().openCart()
       },
 
-      removeItem: (productId) => {
+      removeItem: (productId, flavor) => {
         set((state) => ({
-          items: state.items.filter((item) => item.product.id !== productId),
+          items: state.items.filter(
+            (item) => !itemMatches(item, productId, flavor),
+          ),
         }))
       },
 
-      updateQuantity: (productId, quantity) => {
+      updateQuantity: (productId, quantity, flavor) => {
         if (quantity <= 0) {
-          get().removeItem(productId)
+          get().removeItem(productId, flavor)
           return
         }
         set((state) => ({
           items: state.items.map((item) =>
-            item.product.id === productId ? { ...item, quantity } : item,
+            itemMatches(item, productId, flavor) ? { ...item, quantity } : item,
           ),
         }))
       },

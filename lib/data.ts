@@ -8,6 +8,7 @@ export type Product = {
   images?: string[]
   comingSoon?: boolean
   description?: string
+  flavors?: string[]
 }
 
 export const products: Product[] = [
@@ -23,6 +24,7 @@ export const products: Product[] = [
       "/illustrations/products/cheesecake-slice.png",
     ],
     description: "Toppings: limón, chinola, fresa, dulce de leche y nutella",
+    flavors: ["Limón", "Chinola", "Fresa", "Dulce de leche", "Nutella"],
   },
   {
     id: 2,
@@ -32,6 +34,7 @@ export const products: Product[] = [
     emoji: "🍰",
     image: "/illustrations/products/cheesecake-slice.png",
     description: "Toppings: limón, chinola, fresa, dulce de leche y nutella",
+    flavors: ["Limón", "Chinola", "Fresa", "Dulce de leche", "Nutella"],
   },
   {
     id: 3,

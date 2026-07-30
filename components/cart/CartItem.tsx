@@ -23,6 +23,9 @@ export function CartItem({ item }: { item: CartItemType }) {
         <div className="flex items-start justify-between gap-2">
           <span className="font-heading text-sm leading-tight">
             {item.product.name}
+            {item.flavor && (
+              <span className="ml-1 text-xs text-brand-purple">({item.flavor})</span>
+            )}
           </span>
           <span className="font-heading text-sm text-brand-black">
             {formatPrice(item.product.price * item.quantity)}
@@ -34,7 +37,7 @@ export function CartItem({ item }: { item: CartItemType }) {
               variant="noShadow"
               size="icon"
               className="h-7 w-7 border-2 border-border bg-secondary-background"
-              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+              onClick={() => updateQuantity(item.product.id, item.quantity - 1, item.flavor)}
             >
               <Minus className="size-3" />
             </Button>
@@ -45,7 +48,7 @@ export function CartItem({ item }: { item: CartItemType }) {
               variant="noShadow"
               size="icon"
               className="h-7 w-7 border-2 border-border bg-secondary-background"
-              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+              onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.flavor)}
             >
               <Plus className="size-3" />
             </Button>
@@ -54,7 +57,7 @@ export function CartItem({ item }: { item: CartItemType }) {
             variant="noShadow"
             size="icon"
             className="h-7 w-7 border-2 border-border bg-brand-purple text-brand-black"
-            onClick={() => removeItem(item.product.id)}
+            onClick={() => removeItem(item.product.id, item.flavor)}
           >
             <Trash2 className="size-3" />
           </Button>

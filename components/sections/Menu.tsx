@@ -18,6 +18,9 @@ function ProductCard({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1)
   const [adding, setAdding] = useState(false)
   const [imageIndex, setImageIndex] = useState(0)
+  const [flavor, setFlavor] = useState<string | undefined>(
+    product.flavors?.[0],
+  )
   const { addItem } = useCartStore()
 
   const images = product.images && product.images.length > 1 ? product.images : [product.image]
@@ -28,12 +31,13 @@ function ProductCard({ product }: { product: Product }) {
 
   const handleAdd = () => {
     setAdding(true)
-    addItem(product, quantity)
+    addItem(product, quantity, flavor)
     toast("¡Agregado al carrito!", {
-      description: `${quantity}x ${product.name}`,
+      description: `${quantity}x ${product.name}${flavor ? ` (${flavor})` : ""}`,
     })
     setTimeout(() => setAdding(false), 300)
     setQuantity(1)
+    setFlavor(product.flavors?.[0])
   }
 
   return (
@@ -112,6 +116,31 @@ function ProductCard({ product }: { product: Product }) {
             {formatPrice(product.price)}
           </span>
         </div>
+
+        {/* Flavor selector */}
+        {product.flavors && product.flavors.length > 0 && (
+          <div className="flex flex-col gap-2">
+            <span className="font-heading text-xs uppercase text-brand-black">
+              Sabor
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {product.flavors.map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setFlavor(f)}
+                  className={`rounded-full border-[3px] px-3 py-1 font-heading text-xs uppercase transition-all ${
+                    flavor === f
+                      ? "border-border bg-brand-green text-brand-black shadow-[2px_2px_0_rgba(34,34,34,0.85)]"
+                      : "border-border bg-white hover:bg-brand-cream"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Quantity + Add to cart */}
         <div className="mt-auto flex items-center gap-2">
