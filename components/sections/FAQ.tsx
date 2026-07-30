@@ -50,6 +50,23 @@ const faqs = [
     ),
   },
   {
+    id: "trueshore",
+    icon: "🏢",
+    question: "¿Hacen entregas en True Shore?",
+    answer: (
+      <>
+        <p className="mb-2">Si trabajas conmigo, ¡también puedes recibir tu pedido en la oficina!</p>
+        <p className="mb-2">
+          La entrega tiene un costo fijo de <strong>RD$50</strong> por pedido.
+        </p>
+        <p>
+          Si desean hacer un pedido entre varias personas, escríbannos para
+          coordinarlo💚
+        </p>
+      </>
+    ),
+  },
+  {
     id: "48h",
     icon: "⏰",
     question: "¿Puedo pedir con menos de 48 horas de anticipación?",

@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import { useCartStore } from "@/lib/store/cart-store"
 import { formatPrice } from "@/lib/utils"
 import { timeSlots } from "./DeliveryCalendar"
+import { deliveryZones } from "@/lib/data"
 import { Truck } from "lucide-react"
 
 export function OrderSummary({
@@ -25,6 +26,8 @@ export function OrderSummary({
 }) {
   const { items, total } = useCartStore()
   const subtotal = total()
+  const deliveryFee = deliveryZones[form.neighborhood] ?? 0
+  const orderTotal = subtotal + deliveryFee
 
   return (
     <div className="flex flex-col gap-4 animate-fade-in-up">
@@ -32,7 +35,9 @@ export function OrderSummary({
         <div className="flex items-center gap-2">
           <Truck className="size-4 shrink-0" />
           <span className="font-heading text-sm">
-            El costo de envío se confirma manualmente por email o WhatsApp.
+            {deliveryFee > 0
+              ? "Entrega en True Shore: RD$50 fijo por pedido."
+              : "El costo de envío se confirma manualmente por email o WhatsApp."}
           </span>
         </div>
       </div>
@@ -60,10 +65,16 @@ export function OrderSummary({
           <span>Subtotal</span>
           <span className="font-heading">{formatPrice(subtotal)}</span>
         </div>
+        <div className="flex justify-between text-sm">
+          <span>Envío</span>
+          <span className="font-heading">
+            {deliveryFee > 0 ? formatPrice(deliveryFee) : "Por confirmar"}
+          </span>
+        </div>
         <Separator className="my-2" />
         <div className="flex items-center justify-between rounded-base bg-brand-black p-3 text-lg text-white shadow-[4px_4px_0_#222222]">
           <span className="font-heading">TOTAL</span>
-          <span className="font-heading">{formatPrice(subtotal)}</span>
+          <span className="font-heading">{formatPrice(orderTotal)}</span>
         </div>
       </div>
 

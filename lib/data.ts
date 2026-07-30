@@ -132,6 +132,7 @@ export const categories = [
 ]
 
 export const neighborhoods = [
+  "True Shore",
   "Piantini",
   "Naco",
   "Evaristo Morales",
@@ -170,6 +171,10 @@ export const neighborhoods = [
   "Santo Domingo Norte",
   "Santo Domingo Oeste",
 ]
+
+export const deliveryZones: Record<string, number> = {
+  "True Shore": 50,
+}
 
 export const testimonials = [
   {

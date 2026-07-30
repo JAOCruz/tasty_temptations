@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { useCartStore } from "@/lib/store/cart-store"
-import { neighborhoods } from "@/lib/data"
+import { neighborhoods, deliveryZones } from "@/lib/data"
 import { formatPrice } from "@/lib/utils"
 import { startOfTomorrow, format } from "date-fns"
 import { es } from "date-fns/locale"
@@ -66,6 +66,8 @@ export function CheckoutDialog({
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   const subtotal = total()
+  const deliveryFee = deliveryZones[form.neighborhood] ?? 0
+  const orderTotal = subtotal + deliveryFee
 
   const canProceed = () => {
     switch (step) {
@@ -110,8 +112,8 @@ export function CheckoutDialog({
         total: item.product.price * item.quantity,
       })),
       subtotal,
-      deliveryFee: "Por confirmar manualmente",
-      orderTotal: subtotal,
+      deliveryFee: deliveryFee > 0 ? deliveryFee : "Por confirmar manualmente",
+      orderTotal,
     }
 
     try {
@@ -304,7 +306,11 @@ export function CheckoutDialog({
                 <p className="text-sm">
                   Envío:
                   <br />
-                  <strong>Por confirmar manualmente</strong>
+                  <strong>
+                    {deliveryFee > 0
+                      ? `True Shore - ${formatPrice(deliveryFee)}`
+                      : "Por confirmar manualmente"}
+                  </strong>
                 </p>
               </div>
               {paymentMethod === "transfer" && <BankInfo />}
