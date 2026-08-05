@@ -24,6 +24,30 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
     apple: "/favicon.png",
   },
+  openGraph: {
+    title: "Tasty Temptations | Tentaciones horneadas frescas en Santo Domingo",
+    description:
+      "Tentaciones recién horneadas, con delivery o pickup en Santo Domingo. Cheesecakes, brownies, cinnamon rolls y más pecados deliciosos.",
+    url: "https://tastytemptations.com.do",
+    siteName: "Tasty Temptations",
+    images: [
+      {
+        url: "https://tastytemptations.com.do/logo-horizontal.png",
+        width: 1200,
+        height: 630,
+        alt: "Tasty Temptations",
+      },
+    ],
+    locale: "es_DO",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tasty Temptations | Tentaciones horneadas frescas en Santo Domingo",
+    description:
+      "Tentaciones recién horneadas, con delivery o pickup en Santo Domingo. Cheesecakes, brownies, cinnamon rolls y más pecados deliciosos.",
+    images: ["https://tastytemptations.com.do/logo-horizontal.png"],
+  },
 };
 
 export default function RootLayout({
