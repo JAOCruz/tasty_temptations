@@ -106,6 +106,32 @@ export function CustomOrderDialog({
 
   const handleSubmit = async () => {
     setSubmitting(true)
+
+    const dashboardPayload = {
+      type: "custom",
+      name: form.name,
+      phone: form.phone,
+      email: form.email || null,
+      address: null,
+      neighborhood: null,
+      notes: form.notes,
+      deliveryDate: form.date,
+      timeSlot: null,
+      paymentMethod: form.paymentMethod,
+      items: [
+        {
+          name: form.product,
+          flavor: form.flavor,
+          quantity: 1,
+          price: parseFloat(form.budget.replace(/[^0-9.]/g, "")) || 0,
+          total: parseFloat(form.budget.replace(/[^0-9.]/g, "")) || 0,
+        },
+      ],
+      subtotal: parseFloat(form.budget.replace(/[^0-9.]/g, "")) || 0,
+      deliveryFee: null,
+      orderTotal: parseFloat(form.budget.replace(/[^0-9.]/g, "")) || 0,
+    }
+
     try {
       const response = await fetch("https://submit-form.com/1Qk2wvqzQ", {
         method: "POST",
@@ -137,6 +163,19 @@ export function CustomOrderDialog({
       )
     } finally {
       setSubmitting(false)
+    }
+
+    // Also save to dashboard
+    try {
+      await fetch("https://tasty-temptations-dashboard.netlify.app/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dashboardPayload),
+      })
+    } catch (error) {
+      console.error("Failed to save order to dashboard:", error)
     }
   }
 

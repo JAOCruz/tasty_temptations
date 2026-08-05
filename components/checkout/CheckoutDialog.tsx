@@ -136,6 +136,19 @@ export function CheckoutDialog({
       console.error("Failed to submit order to Formspark:", error)
     }
 
+    // Also save to dashboard
+    try {
+      await fetch("https://tasty-temptations-dashboard.netlify.app/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderPayload),
+      })
+    } catch (error) {
+      console.error("Failed to save order to dashboard:", error)
+    }
+
     confetti({
       particleCount: 150,
       spread: 70,
