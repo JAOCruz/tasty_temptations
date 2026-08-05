@@ -321,7 +321,7 @@ export function CheckoutDialog({
                   <br />
                   <strong>
                     {deliveryFee > 0
-                      ? `True Shore - ${formatPrice(deliveryFee)}`
+                      ? `Trueshore - ${formatPrice(deliveryFee)}`
                       : "Por confirmar manualmente"}
                   </strong>
                 </p>

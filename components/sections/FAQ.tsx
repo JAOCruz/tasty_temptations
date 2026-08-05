@@ -52,7 +52,7 @@ const faqs = [
   {
     id: "trueshore",
     icon: "🏢",
-    question: "¿Hacen entregas en True Shore?",
+    question: "¿Hacen entregas en Trueshore?",
     answer: (
       <>
         <p className="mb-2">Si trabajas conmigo, ¡también puedes recibir tu pedido en la oficina!</p>

@@ -36,7 +36,7 @@ export function OrderSummary({
           <Truck className="size-4 shrink-0" />
           <span className="font-heading text-sm">
             {deliveryFee > 0
-              ? "Entrega en True Shore: RD$50 fijo por pedido."
+              ? "Entrega en Trueshore: RD$50 fijo por pedido."
               : "El costo de envío se confirma manualmente por email o WhatsApp."}
           </span>
         </div>
