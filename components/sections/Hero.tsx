@@ -51,9 +51,9 @@ export function Hero() {
 
       {/* Cute floating decorations */}
       <CuteCupcake className="absolute left-4 top-24 z-0 h-16 w-16 animate-wiggle opacity-90 md:left-12 md:top-32 md:h-24 md:w-24" />
-      <CuteHeart className="absolute right-8 top-20 z-0 h-14 w-14 animate-float-slow opacity-90 md:right-24 md:top-28 md:h-20 md:w-20" />
+      <CuteHeart className="absolute right-8 top-24 z-0 h-16 w-16 animate-float-slow opacity-90 md:right-24 md:top-32 md:h-23 md:w-20" />
       <CuteRoll className="absolute bottom-32 left-8 z-0 h-16 w-16 animate-float-slow-reverse opacity-90 md:bottom-40 md:left-20 md:h-24 md:w-24" />
-      <CuteStar className="absolute right-6 top-1/2 z-0 h-10 w-10 animate-spin-slow opacity-90 md:right-32 md:h-14 md:w-14" />
+      <CuteStar className="absolute right-6 bottom-32 z-0 h-10 w-10 animate-spin-slow opacity-90 md:right-32 md:h-24 md:w-24" />
 
       {/* Main content */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6 lg:px-8">
@@ -83,9 +83,9 @@ export function Hero() {
           </div>
 
           {/* Top right - value prop */}
-          <div className="relative hidden h-full flex-col items-end justify-end pb-4 pr-4 md:flex md:pb-8">
-            <div className="max-w-[260px] rotate-2 rounded-[1.25rem] border-[3px] border-border bg-white p-4 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
-              <p className="font-heading text-sm">
+          <div className="relative hidden h-full flex-col items-end justify-end pb-60 pr-30 md:flex md:pb-8">
+            <div className="max-w-[300px] rotate-2 rounded-[1.25rem] border-[3px] border-border bg-white p-4 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
+              <p className="font-heading text-m">
                 Pide con 48 horas de antelación, así todo sale fresco del horno. ¿Lo necesitas antes? Pregúntanos.
               </p>
               <div className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
@@ -145,8 +145,8 @@ export function Hero() {
                   <Image
                     src={tag.icon}
                     alt={tag.label}
-                    width={18}
-                    height={18}
+                    width={40}
+                    height={40}
                     className="rounded-full border border-brand-black"
                   />
                   {tag.label}
