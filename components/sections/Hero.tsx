@@ -44,9 +44,7 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-brand-cream pt-16 md:min-h-[92vh]">
       {/* Background split with halftone dots */}
-      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-[55%_45%]">
-        <div className="bg-pop-dots-green" />
-        <div className="bg-pop-dots-cream" />
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-green to-brand-cream-2 grid grid-cols-1 md:grid-cols-[55%_45%]">
       </div>
 
       {/* Cute floating decorations */}
@@ -156,9 +154,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Bottom lime bar */}
-      <div className="relative z-20 h-2 bg-brand-green" />
 
       {/* Marquee ticker */}
       <div className="relative z-30 bg-brand-black py-2.5">
