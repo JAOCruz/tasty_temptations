@@ -34,11 +34,15 @@ const heroDesserts = [
 ]
 
 const bottomTags = [
-  { label: "Cheesecakes", icon: "/favicon.png" },
-  { label: "Brownies", icon: "/illustrations/hero-pop/brownies.png" },
-  { label: "Cinnamon Rolls", icon: "/illustrations/hero-pop/rolls.png" },
-  { label: "Carrot Cake", icon: "/illustrations/hero-pop/carrot-cake.png" },
+  { label: "Cheesecakes", icon: "/favicon.png", targetId: "menu-item-1" },
+  { label: "Brownies", icon: "/illustrations/hero-pop/brownies.png", targetId: "menu-item-3" },
+  { label: "Cinnamon Rolls", icon: "/illustrations/hero-pop/rolls.png", targetId: "menu-item-6" },
+  { label: "Carrot Cake", icon: "/illustrations/hero-pop/carrot-cake.png", targetId: "menu-item-9" },
 ]
+
+const scrollToMenuItem = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" })
+}
 
 export function Hero() {
   return (
@@ -136,9 +140,11 @@ export function Hero() {
             </a>
             <div className="mt-2 flex flex-wrap justify-center gap-2 md:justify-start">
               {bottomTags.map((tag) => (
-                <span
+                <button
                   key={tag.label}
-                  className="cute-tag"
+                  type="button"
+                  onClick={() => scrollToMenuItem(tag.targetId)}
+                  className="cute-tag cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-[3px_3px_0_rgba(34,34,34,0.85)]"
                 >
                   <Image
                     src={tag.icon}
@@ -148,7 +154,7 @@ export function Hero() {
                     className="rounded-full border border-brand-black"
                   />
                   {tag.label}
-                </span>
+                </button>
               ))}
             </div>
           </div>

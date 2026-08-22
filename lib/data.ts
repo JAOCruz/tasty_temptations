@@ -201,4 +201,16 @@ export const testimonials = [
     neighborhood: "Santo Domingo",
     quote: "En verdad tus brownies son el final.",
   },
+  {
+    id: 5,
+    name: "Alberto",
+    neighborhood: "",
+    quote: "El que inventó el cheesecake de chinola por primera vez, debe retirarse porque el que comí hoy taba de Tokyo Drift... Fuera de chercha estaba muy bueno.",
+  },
+  {
+    id: 6,
+    name: "Ricardo",
+    neighborhood: "",
+    quote: "Estaba buenísimo 10/10",
+  },
 ]
