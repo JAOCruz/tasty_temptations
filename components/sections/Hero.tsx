@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Marquee } from "@/components/shared/Marquee"
+import { HeroBgShift, HeroBgMesh, HeroBgAurora } from "@/components/shared/HeroBackgrounds"
 import {
   CuteCupcake,
   CuteHeart,
@@ -44,12 +45,22 @@ const scrollToMenuItem = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" })
 }
 
-export function Hero() {
+export type HeroBgVariant = "current" | "shift" | "mesh" | "aurora"
+
+export function Hero({ bgVariant = "current" }: { bgVariant?: HeroBgVariant }) {
   return (
     <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-brand-cream pt-16">
-      {/* Background split with halftone dots */}
-      <div className="absolute inset-0 bg-linear-to-r/oklch from-brand-green via-red-400 to-brand-cream-2 grid grid-cols-1 md:grid-cols-[55%_45%]">
-      </div>
+      {/* Background */}
+      {bgVariant === "shift" ? (
+        <HeroBgShift />
+      ) : bgVariant === "mesh" ? (
+        <HeroBgMesh />
+      ) : bgVariant === "aurora" ? (
+        <HeroBgAurora />
+      ) : (
+        <div className="absolute inset-0 bg-linear-to-r/oklch from-brand-green via-red-400 to-brand-cream-2 grid grid-cols-1 md:grid-cols-[55%_45%]">
+        </div>
+      )}
 
       {/* Main content */}
       <div className="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col px-4 py-6 sm:px-8 lg:px-12">
