@@ -56,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${lora.variable} ${poppins.variable}`}>
+    <html lang="es" suppressHydrationWarning className={`${lora.variable} ${poppins.variable}`}>
       <body className="min-h-screen bg-background font-base antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
