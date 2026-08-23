@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Navbar />
       <main>
-        <Hero />
+        <Hero bgVariant="shift"/>
         <Menu />
         <CustomOrders />
         <HowItWorks />

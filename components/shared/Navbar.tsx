@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { CartButton } from "@/components/cart/CartButton"
+import { HeroBgAurora } from "./HeroBackgrounds"
 
 const navLinks = [
   { label: "Menú", href: "#menu" },
@@ -19,8 +20,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b-[3px] border-brand-black bg-brand-purple">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 z-50 w-full border-b-[3px] border-brand-black bg-brand-1">
+      <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-4 sm:px-6 lg:px-75">
         <a href="#" className="flex items-center gap-2">
           <div className="flex size-14 items-center justify-center rounded-full border-[3px] border-brand-black bg-brand-cream shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
             <Image
@@ -31,7 +32,7 @@ export function Navbar() {
               className="object-contain"
             />
           </div>
-          <span className="font-heading text-xl font-bold uppercase tracking-tight text-white sm:text-2xl">
+          <span className="font-heading text-xl font-bold uppercase tracking-tight text-black sm:text-2xl">
             Tasty Temptations
           </span>
         </a>
@@ -42,7 +43,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="font-heading text-white transition-colors hover:text-brand-yellow"
+              className="font-heading text-black transition-colors hover:text-brand-yellow"
             >
               {link.label}
             </a>
@@ -55,19 +56,19 @@ export function Navbar() {
           <CartButton />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="noShadow" size="icon" className="bg-brand-purple text-white hover:text-brand-yellow">
+              <Button variant="noShadow" size="icon" className="bg-brand-purple text-black hover:text-brand-yellow">
                 <Menu className="size-6" />
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full border-l-2 border-border bg-brand-purple p-0 sm:max-w-sm">
               <div className="flex h-16 items-center justify-between border-b-2 border-brand-black px-4">
-                <span className="font-heading text-xl text-white">Menú</span>
+                <span className="font-heading text-xl text-black">Menú</span>
                 <Button
                   variant="noShadow"
                   size="icon"
                   onClick={() => setOpen(false)}
-                  className="bg-brand-purple text-white hover:text-brand-yellow"
+                  className="bg-brand-purple text-black hover:text-brand-yellow"
                 >
                   <X className="size-6" />
                 </Button>
@@ -78,7 +79,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-base border-2 border-transparent px-4 py-3 font-heading text-lg text-white transition-colors hover:border-brand-black hover:text-brand-yellow"
+                    className="rounded-base border-2 border-transparent px-4 py-3 font-heading text-lg text-black transition-colors hover:border-brand-black hover:text-brand-yellow"
                   >
                     {link.label}
                   </a>

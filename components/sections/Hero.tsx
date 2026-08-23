@@ -5,12 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Marquee } from "@/components/shared/Marquee"
 import { HeroBgShift, HeroBgMesh, HeroBgAurora } from "@/components/shared/HeroBackgrounds"
 import {
-  CuteCupcake,
-  CuteHeart,
-  CuteRoll,
-  CuteStar,
-} from "@/components/shared/CuteDecorations"
-import {
   ArrowRight,
   MapPin,
   CakeSlice,
