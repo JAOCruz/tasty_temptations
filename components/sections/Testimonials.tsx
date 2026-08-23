@@ -42,7 +42,7 @@ function TestimonialCard({
 
 export function Testimonials() {
   return (
-    <section className="relative overflow-hidden bg-pop-dots-purple py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-linear-to-b/oklch from-brand-green to-brand-purple py-20 sm:py-28">
       <NeoSparkles variant="testimonials" />
       <div className="relative z-10 mx-auto mb-12 max-w-3xl px-4 text-center sm:px-6 lg:px-8">
         <div className="inline-block rounded-base border-[3px] border-border bg-white p-6 shadow-[6px_6px_0_#222222] sm:p-8">

@@ -27,7 +27,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative overflow-hidden bg-pop-dots-green py-20 sm:py-28">
+    <section id="how-it-works" className="relative overflow-hidden bg-linear-to-b from-brand-cream-2 to-brand-green py-20 sm:py-28">
       <NeoSparkles variant="how-it-works" />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 text-center">

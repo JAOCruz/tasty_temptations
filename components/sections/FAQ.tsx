@@ -119,7 +119,7 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative overflow-hidden bg-pop-dots-cream py-20 sm:py-28">
+    <section id="faq" className="relative overflow-hidden bg-linear-to-b/srgb from-brand-purple to-red-400 py-20 sm:py-28">
       <NeoSparkles variant="faq" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

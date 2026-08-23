@@ -195,7 +195,7 @@ export function Menu() {
       : products.filter((p) => p.category === activeCategory)
 
   return (
-    <section id="menu" className="relative overflow-hidden bg-pop-dots-cream py-20 sm:py-28">
+    <section id="menu" className="relative overflow-hidden bg-brand-cream py-20 sm:py-28">
       <NeoSparkles variant="menu" />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">

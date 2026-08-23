@@ -48,7 +48,7 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-brand-cream pt-16">
       {/* Background split with halftone dots */}
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-green to-brand-cream-2 grid grid-cols-1 md:grid-cols-[55%_45%]">
+      <div className="absolute inset-0 bg-linear-to-r/oklch from-brand-green via-red-400 to-brand-cream-2 grid grid-cols-1 md:grid-cols-[55%_45%]">
       </div>
 
       {/* Main content */}
