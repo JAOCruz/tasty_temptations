@@ -30,7 +30,7 @@ export function Navbar() {
     <nav
       className={`fixed top-0 z-50 w-full border-b-[3px] transition-colors duration-300 ${
         scrolled
-          ? "border-brand-black bg-brand-green"
+          ? "border-brand-black bg-brand-cream"
           : "border-transparent bg-transparent"
       }`}
     >
