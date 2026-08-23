@@ -46,7 +46,7 @@ function ProductCard({ product }: { product: Product }) {
         {/* Image container */}
         <div className="product-pop-art relative aspect-square w-full overflow-hidden rounded-[1.25rem] border-[3px] border-border bg-brand-cream shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
           {product.comingSoon ? (
-            <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-white p-5 text-center">
+            <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-brand-cream p-5 text-center">
               <span className="text-4xl">📷</span>
               <p className="font-heading text-sm leading-tight text-brand-black">
                 ¡Foto próximamente! pero el sabor ya está listo para conquistarte.
@@ -195,7 +195,7 @@ export function Menu() {
       : products.filter((p) => p.category === activeCategory)
 
   return (
-    <section id="menu" className="relative overflow-hidden bg-brand-cream py-20 sm:py-28">
+    <section id="menu" className="relative overflow-hidden bg-linear-to-b/oklch from-brand-cream-2 to-red-400 via-brand-purple py-20 sm:py-28">
       <NeoSparkles variant="menu" />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">

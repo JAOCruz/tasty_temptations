@@ -9,7 +9,7 @@ export function CustomOrders() {
   const [open, setOpen] = useState(false)
 
   return (
-    <section id="custom-orders" className="relative overflow-hidden bg-linear-to-b from-brand-cream to-brand-cream-2 py-12 sm:py-16">
+    <section id="custom-orders" className="relative overflow-hidden bg-linear-to-b/oklch from-red-400 to-brand-cream-2 py-12 sm:py-16">
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <div className="mb-6 text-center">
