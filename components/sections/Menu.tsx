@@ -44,7 +44,7 @@ function ProductCard({ product }: { product: Product }) {
     <Card id={`menu-item-${product.id}`} className="group relative overflow-hidden rounded-[1.25rem] border-[3px] border-border bg-white shadow-[3px_3px_0_rgba(34,34,34,0.85)] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0_rgba(34,34,34,0.85)]">
       <CardContent className="flex flex-col gap-4 p-4">
         {/* Image container */}
-        <div className="product-pop-art relative aspect-square w-full overflow-hidden rounded-[1.25rem] border-[3px] border-border bg-pop-dots-white shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
+        <div className="product-pop-art relative aspect-square w-full overflow-hidden rounded-[1.25rem] border-[3px] border-border bg-brand-cream shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
           {product.comingSoon ? (
             <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-white p-5 text-center">
               <span className="text-4xl">📷</span>

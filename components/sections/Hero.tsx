@@ -46,29 +46,17 @@ const scrollToMenuItem = (id: string) => {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-brand-cream pt-16 md:min-h-[92vh]">
+    <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-brand-cream pt-16">
       {/* Background split with halftone dots */}
       <div className="absolute inset-0 bg-gradient-to-r from-brand-green to-brand-cream-2 grid grid-cols-1 md:grid-cols-[55%_45%]">
       </div>
 
-      {/* Cute floating decorations */}
-      <CuteCupcake className="absolute left-4 top-24 z-0 h-16 w-16 animate-wiggle opacity-90 md:left-12 md:top-32 md:h-24 md:w-24" />
-      <CuteHeart className="absolute right-8 top-24 z-0 h-16 w-16 animate-float-slow opacity-90 md:right-24 md:top-32 md:h-23 md:w-20" />
-      <CuteRoll className="absolute bottom-32 left-8 z-0 h-16 w-16 animate-float-slow-reverse opacity-90 md:bottom-40 md:left-20 md:h-24 md:w-24" />
-      <CuteStar className="absolute right-6 bottom-32 z-0 h-10 w-10 animate-spin-slow opacity-90 md:right-32 md:h-24 md:w-24" />
-
       {/* Main content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col px-4 py-6 sm:px-8 lg:px-12">
         {/* Top row */}
         <div className="grid flex-1 grid-cols-1 items-end gap-6 md:grid-cols-[55%_45%] md:gap-8">
-          {/* Top left - Title & badge */}
+          {/* Top left - Title */}
           <div className="flex flex-col items-center gap-4 pb-4 text-center md:items-start md:pb-8 md:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border-[3px] border-border bg-white px-4 py-1.5 shadow-[3px_3px_0_rgba(34,34,34,0.85)]">
-              <CakeSlice className="size-4 text-brand-purple" />
-              <span className="font-heading text-xs uppercase tracking-wider">
-                Santo Domingo, DR
-              </span>
-            </div>
             <h1 className="w-full px-2 text-center font-heading text-[11vw] font-bold uppercase leading-[0.85] tracking-tight text-brand-black break-words sm:px-0 sm:text-5xl md:text-left md:text-6xl lg:text-7xl xl:text-8xl">
               TASTY
               <br />
@@ -162,7 +150,7 @@ export function Hero() {
       </div>
 
       {/* Marquee ticker */}
-      <div className="relative z-30 bg-brand-black py-2.5">
+      <div className="relative z-30 bg-brand-purple border-t-[3px] border-b-[3px] border-brand-black py-2.5">
         <Marquee className="border-none" speed={25}>
           <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
             Tentaciones horneadas desde cero.
