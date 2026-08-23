@@ -10,7 +10,7 @@ export function CustomOrders() {
 
   return (
     <section id="custom-orders" className="relative overflow-hidden bg-linear-to-b/oklch from-red-400 to-brand-cream-2 py-12 sm:py-16">
-      <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <div className="mb-6 text-center">
           <h2 className="mb-2 font-heading text-3xl uppercase text-brand-black sm:text-4xl lg:text-5xl">

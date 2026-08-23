@@ -122,7 +122,7 @@ export function FAQ() {
     <section id="faq" className="relative overflow-hidden bg-linear-to-b/srgb from-brand-purple to-red-400 py-20 sm:py-28">
       <NeoSparkles variant="faq" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <div className="mx-auto inline-block rounded-base border-[3px] border-border bg-white p-6 shadow-[6px_6px_0_#222222] sm:p-8">
             <span className="pop-art-sticker pop-art-sticker-purple mb-4 inline-flex -rotate-2">

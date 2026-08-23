@@ -57,7 +57,7 @@ export function Hero({ bgVariant = "current" }: { bgVariant?: HeroBgVariant }) {
       )}
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col px-4 py-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6 lg:px-8">
         {/* Top row */}
         <div className="grid flex-1 grid-cols-1 items-end gap-6 md:grid-cols-[55%_45%] md:gap-8">
           {/* Top left - Title */}

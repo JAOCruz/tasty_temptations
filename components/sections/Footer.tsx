@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer id="footer" className="bg-linear-to-b/oklch from-red-400 to-red-600 pt-16">
-      <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-6 rounded-base border-[3px] border-border bg-white p-8 text-center shadow-[6px_6px_0_#222222] sm:p-12">
           <a
             href="#"
