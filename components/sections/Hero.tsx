@@ -160,11 +160,11 @@ export function Hero({ bgVariant = "current" }: { bgVariant?: HeroBgVariant }) {
           <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
             Tentaciones horneadas desde cero.
           </span>
-          <span className="text-brand-yellow">★</span>
+          <span className="text-brand-yellow">🧁</span>
           <span className="px-4 font-heading text-sm uppercase tracking-wider text-white">
             El costo de envío se confirma por email o WhatsApp.
           </span>
-          <span className="text-brand-yellow">★</span>
+          <span className="text-brand-yellow">🧁</span>
         </Marquee>
       </div>
     </section>
