@@ -56,7 +56,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="font-heading text-black transition-colors hover:text-brand-yellow"
+              className="font-heading text-black transition-colors hover:text-brand-purple"
             >
               {link.label}
             </a>
@@ -92,7 +92,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-base border-2 border-transparent px-4 py-3 font-heading text-lg text-black transition-colors hover:border-brand-black hover:text-brand-yellow"
+                    className="rounded-base border-2 border-transparent px-4 py-3 font-heading text-lg text-black transition-colors hover:border-brand-black hover:text-brand-purple"
                   >
                     {link.label}
                   </a>
